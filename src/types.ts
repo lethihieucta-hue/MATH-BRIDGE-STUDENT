@@ -19,14 +19,18 @@ export interface MathTerm {
   id: string;
   term: string;
   phonetic?: string;
+  phoneticIpa?: string;
   vietnamese: string;
-  category: "algebra" | "calculus" | "geometry" | "stats" | "instructional" | "word_problems" | "trig" | "vectors" | "sequences" | "probability";
+  vietnameseMeaning?: string;
+  category: "algebra" | "calculus" | "geometry" | "stats" | "instructional" | "word_problems" | "trig" | "vectors" | "sequences" | "probability" | string;
   gradeLevel: HighSchoolGrade; // Lớp 10, 11, hoặc 12
   chapterId?: string; // e.g. "g10_c1", "g10_c2", "g11_c1", "g12_c1"
-  topicVi: string; // ví dụ: "Hàm số bậc 2 & Đỉnh", "Đạo hàm & Tiếp tuyến", "Véctơ không gian"
+  topicVi?: string; // ví dụ: "Hàm số bậc 2 & Đỉnh", "Đạo hàm & Tiếp tuyến", "Véctơ không gian"
   definitionEn: string;
   definitionVi: string;
   mathSymbol?: string;
+  formulaLatex?: string;
+  exampleSentence?: string;
   exampleSentenceEn: string;
   exampleSentenceVi: string;
   falseFriendPitfall?: string;
@@ -217,6 +221,8 @@ export interface DiagnosticResult {
     vietnameseHint: string;
   };
 }
+
+export type ErrorDiagnosisResult = DiagnosticResult;
 
 export interface UserProgress {
   xp: number;
