@@ -70,9 +70,11 @@ export const ErrorDiagnosticStudio: React.FC<DiagnosticStudioProps> = ({ current
           }),
         });
 
-        const json = await res.json();
-        if (json.success && json.data) {
-          diagData = json.data;
+        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+          const json = await res.json();
+          if (json.success && json.data) {
+            diagData = json.data;
+          }
         }
       }
 

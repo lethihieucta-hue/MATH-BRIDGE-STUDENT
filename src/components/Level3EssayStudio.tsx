@@ -151,9 +151,11 @@ export const Level3EssayStudio: React.FC<Level3EssayStudioProps> = ({
           }),
         });
 
-        const json = await res.json();
-        if (json.success && json.data) {
-          result = json.data;
+        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+          const json = await res.json();
+          if (json.success && json.data) {
+            result = json.data;
+          }
         }
       }
 
@@ -207,9 +209,11 @@ export const Level3EssayStudio: React.FC<Level3EssayStudioProps> = ({
           }),
         });
 
-        const data = await res.json();
-        if (data.success && data.data) {
-          probData = data.data;
+        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+          const data = await res.json();
+          if (data.success && data.data) {
+            probData = data.data;
+          }
         }
       }
 

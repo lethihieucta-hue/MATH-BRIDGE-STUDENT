@@ -144,9 +144,11 @@ export const AIExamStudio: React.FC<AIExamStudioProps> = ({
           }),
         });
 
-        const result = await response.json();
-        if (result.success && result.data) {
-          exam = result.data;
+        if (response.ok && response.headers.get("content-type")?.includes("application/json")) {
+          const result = await response.json();
+          if (result.success && result.data) {
+            exam = result.data;
+          }
         }
       }
 

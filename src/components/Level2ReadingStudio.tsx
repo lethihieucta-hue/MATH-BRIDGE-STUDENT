@@ -195,9 +195,11 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
           }),
         });
 
-        const data = await res.json();
-        if (data.success && data.data) {
-          probData = data.data;
+        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+          const data = await res.json();
+          if (data.success && data.data) {
+            probData = data.data;
+          }
         }
       }
 

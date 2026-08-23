@@ -53,7 +53,9 @@ const STORAGE_KEY_MODEL = "gemini_selected_model";
 
 export function getStoredApiKey(): string {
   if (typeof window === "undefined") return "";
-  return localStorage.getItem(STORAGE_KEY_API_KEY) || "";
+  const stored = localStorage.getItem(STORAGE_KEY_API_KEY);
+  if (stored) return stored;
+  return (import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.GEMINI_API_KEY || "") as string;
 }
 
 export function setStoredApiKey(key: string): void {

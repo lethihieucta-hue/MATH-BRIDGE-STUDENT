@@ -188,8 +188,14 @@ export const TutorRoom: React.FC<TutorRoomProps> = ({
           }),
         });
 
-        const data = await res.json();
-        aiReply = data.reply || data.fallbackReply;
+        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+          const data = await res.json();
+          aiReply = data.reply || data.fallbackReply;
+        }
+      }
+
+      if (!aiReply) {
+        throw new Error("Không nhận được phản hồi từ AI. Vui lòng kiểm tra lại kết nối hoặc cài đặt API Key.");
       }
 
       const aiMsg: ChatMessage = {
@@ -225,11 +231,13 @@ export const TutorRoom: React.FC<TutorRoomProps> = ({
         }),
       });
 
-      const json = await res.json();
-      if (json.success && json.data) {
-        setSelectedProblem(json.data);
-        setSelectedOption(null);
-        confetti({ particleCount: 30, spread: 60 });
+      if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+        const json = await res.json();
+        if (json.success && json.data) {
+          setSelectedProblem(json.data);
+          setSelectedOption(null);
+          confetti({ particleCount: 30, spread: 60 });
+        }
       }
     } catch (err) {
       console.error(err);

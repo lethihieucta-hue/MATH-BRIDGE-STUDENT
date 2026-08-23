@@ -119,7 +119,7 @@ Hãy đưa ra phản hồi chuẩn theo 5 phần của System Instruction:
     });
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.7-flash",
+      model: "gemini-2.5-flash",
       contents: contents,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION_BASE,
@@ -190,7 +190,7 @@ Hãy trả về JSON có cấu trúc sau:
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.7-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are an expert NLP & Math Education diagnostician. Return valid JSON only.",
@@ -276,7 +276,7 @@ Hãy trả về JSON:
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.7-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a specialized test-prep math author for SAT, AP Calculus, and A-Level. Return valid JSON only.",
@@ -366,7 +366,7 @@ Hãy trả về định dạng JSON DUY NHẤT:
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.7-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are an expert Math Essay Grader and International Math Curriculum Evaluator. Return valid JSON only.",
@@ -517,7 +517,7 @@ Hãy trả về JSON DUY NHẤT theo schema sau:
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.7-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a professional Math Exam Author for Vietnamese High School Curriculum & International SAT/AP Math. Return valid JSON only.",
@@ -597,4 +597,9 @@ async function startServer() {
   });
 }
 
-startServer();
+export { app };
+export default app;
+
+if (!process.env.VERCEL && process.env.NODE_ENV !== "test") {
+  startServer();
+}
