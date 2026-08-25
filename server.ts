@@ -2,14 +2,26 @@ import express, { Request, Response } from "express";
 import path from "path";
 import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
-import { createServer as createViteServer } from "vite";
 
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const router = express.Router();
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 app.use(express.json({ limit: "10mb" }));
+
+// Enable CORS for all incoming requests
+app.use((_req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+  if (_req.method === "OPTIONS") {
+    res.sendStatus(204);
+    return;
+  }
+  next();
+});
 
 // Initialize Google GenAI client
 const apiKey = process.env.GEMINI_API_KEY;
@@ -30,7 +42,7 @@ function getAI(): GoogleGenAI {
 }
 
 const SYSTEM_INSTRUCTION_BASE = `
-You are the **AI Math Bridge Specialized Tutor** – Kiến trúc sư học tập và Trợ giảng ảo cao cấp trong hệ sinh thái tự học thông minh.
+You are the **Math Bridge AI Student Specialized Tutor** – Kiến trúc sư học tập và Trợ giảng ảo cao cấp trong hệ sinh thái tự học thông minh.
 Bạn là sự giao thoa giữa một chuyên gia Toán học quốc tế (SAT/AP/A-Level) và một chuyên gia ngôn ngữ (NLP/ESL).
 Nhiệm vụ của bạn không chỉ là giải toán hay dịch thuật, mà là xây dựng "cây cầu" tư duy, giúp học sinh vượt qua rào cản ngôn ngữ để làm chủ kiến thức Toán học thông qua lộ trình Adaptive Learning 6 giai đoạn:
 1. Giai đoạn 1 (General Foundation): Visual-Linguistic Mapping, ngôn ngữ đơn giản, sơ đồ, khái niệm số lượng/so sánh.
@@ -66,13 +78,13 @@ Quy tắc xử lý lỗi:
 - **Logic & Terminology Review:** [Nhận xét tính chính xác của thuật ngữ và ngữ pháp toán học]
 `;
 
-// API routes
-app.get("/api/health", (_req: Request, res: Response) => {
+// Health check route
+router.get("/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
 // Chat with Tutor
-app.post("/api/tutor/chat", async (req: Request, res: Response) => {
+router.post("/tutor/chat", async (req: Request, res: Response) => {
   try {
     const {
       message,
@@ -162,7 +174,7 @@ Hãy đưa ra phản hồi chuẩn theo 5 phần của System Instruction:
 });
 
 // Diagnostic Deep-dive
-app.post("/api/tutor/diagnose", async (req: Request, res: Response) => {
+router.post("/tutor/diagnose", async (req: Request, res: Response) => {
   try {
     const { problemText, studentAnswer, studentExplanation, stage = 3 } = req.body;
     const ai = getAI();
@@ -230,7 +242,7 @@ Hãy trả về JSON có cấu trúc sau:
 });
 
 // Generate Custom Practice Problem
-app.post("/api/tutor/generate-problem", async (req: Request, res: Response) => {
+router.post("/tutor/generate-problem", async (req: Request, res: Response) => {
   try {
     const { stage = 3, topic = "Algebra", exam = "SAT", difficulty = "Medium" } = req.body;
     const ai = getAI();
@@ -294,7 +306,7 @@ Hãy trả về JSON:
 });
 
 // Grade Level 3 Math Essay in English
-app.post("/api/tutor/grade-essay", async (req: Request, res: Response) => {
+router.post("/tutor/grade-essay", async (req: Request, res: Response) => {
   try {
     const { gradeLevel = 10, problemTitle, problemEnglish, studentEssay, expectedAnswer } = req.body;
     const ai = getAI();
@@ -431,7 +443,7 @@ Hãy trả về định dạng JSON DUY NHẤT:
 });
 
 // Generate AI Exam with customizable English immersion ratio and KNTT topics
-app.post("/api/tutor/generate-exam", async (req: Request, res: Response) => {
+router.post("/tutor/generate-exam", async (req: Request, res: Response) => {
   try {
     const {
       gradeLevel = 10,
@@ -576,16 +588,31 @@ Hãy trả về JSON DUY NHẤT theo schema sau:
   }
 });
 
+// Mount router on both /api prefix and root for universal compatibility
+app.use("/api", router);
+app.use("/", router);
+
 // Vite & Static middleware
 async function startServer() {
-  if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    });
-    app.use(vite.middlewares);
+  const isProduction = process.env.NODE_ENV === "production" || !!process.env.VERCEL;
+  const distPath = path.join(process.cwd(), "dist");
+
+  if (!isProduction) {
+    try {
+      const { createServer: createViteServer } = await import("vite");
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+      });
+      app.use(vite.middlewares);
+    } catch (err) {
+      console.warn("Vite dev server not loaded, falling back to static dist directory:", err);
+      app.use(express.static(distPath));
+      app.get("*", (_req, res) => {
+        res.sendFile(path.join(distPath, "index.html"));
+      });
+    }
   } else {
-    const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
     app.get("*", (_req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
@@ -593,13 +620,14 @@ async function startServer() {
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`AI Math Bridge Server running on http://0.0.0.0:${PORT}`);
+    console.log(`Math Bridge AI Student Server running on http://0.0.0.0:${PORT}`);
   });
 }
 
 export { app };
 export default app;
 
-if (!process.env.VERCEL && process.env.NODE_ENV !== "test") {
+// Only start standalone server if not running as serverless function and not testing
+if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME && process.env.NODE_ENV !== "test") {
   startServer();
 }

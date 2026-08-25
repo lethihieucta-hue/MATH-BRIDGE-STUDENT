@@ -1,6 +1,6 @@
 {
-  "name": "AI Math Bridge Tutor",
-  "description": "Hệ thống học Toán Tiếng Anh 3 Cấp độ chuẩn SGK Kết nối tri thức Lớp 10-12: Học từ vựng qua Postcard & Minigame, Đọc hiểu bài toán & ghi đáp án, Giải tự luận tiếng Anh AI chấm Barem, và Tạo đề kiểm tra AI theo tỉ lệ song ngữ tùy chọn (20% - 100%).",
+  "name": "Math Bridge AI Student",
+  "description": "Hệ thống học Toán Tiếng Anh 3 Cấp độ chuẩn SGK Kết nối tri thức Lớp 10-12: Học từ vựng qua Postcard & Minigame, Đọc hiểu bài toán & ghi đáp án, Giải tự luận tiếng Anh AI chấm Barem và AI Socratic Tutor.",
   "requestFramePermissions": ["microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

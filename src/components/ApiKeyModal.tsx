@@ -35,7 +35,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
   onSuccess,
 }) => {
   const [apiKeyInput, setApiKeyInput] = useState<string>("");
-  const [selectedModel, setSelectedModel] = useState<GeminiModelId>("gemini-3-flash-preview");
+  const [selectedModel, setSelectedModel] = useState<GeminiModelId>("gemini-2.5-flash");
   const [showKey, setShowKey] = useState<boolean>(false);
   const [isTesting, setIsTesting] = useState<boolean>(false);
   const [testResult, setTestResult] = useState<{

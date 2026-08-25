@@ -184,23 +184,66 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
 
       // 2. Fallback to backend API
       if (!probData) {
-        const res = await fetch("/api/tutor/generate-problem", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            stage: 3,
-            topic: chapterName,
-            exam: "SGK Kết nối tri thức",
-            difficulty: "Medium",
-          }),
-        });
+        try {
+          const res = await fetch("/api/tutor/generate-problem", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              stage: 3,
+              topic: chapterName,
+              exam: "SGK Kết nối tri thức",
+              difficulty: "Medium",
+            }),
+          });
 
-        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
-          const data = await res.json();
-          if (data.success && data.data) {
-            probData = data.data;
+          if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+            const data = await res.json();
+            if (data.success && data.data) {
+              probData = data.data;
+            }
           }
+        } catch (fetchErr) {
+          console.warn("Backend fetch failed, using offline fallback:", fetchErr);
         }
+      }
+
+      // 3. Fallback instant problem if AI is offline
+      if (!probData) {
+        probData = {
+          title: `Bài Toán Đọc Hiểu: ${chapterName}`,
+          topic: chapterName,
+          exam: "SGK Kết nối tri thức",
+          stage: 3,
+          difficulty: "Medium",
+          questionEnglish: `In a practical application concerning "${chapterName}" (Grade ${selectedGrade}), given the system parameters, identify the correct mathematical value or statement satisfying the problem conditions.`,
+          questionVietnamese: `Trong một bài toán ứng dụng thực tiễn về chủ đề "${chapterName}" (Toán Lớp ${selectedGrade}), hãy xác định giá trị hoặc khẳng định toán học chính xác thỏa mãn các điều kiện đề bài.`,
+          givenParameters: [
+            { label: "Topic", value: chapterName, meaningVi: `Chương trình Toán THPT Lớp ${selectedGrade}` },
+            { label: "Condition", value: "Standard curriculum constraints", meaningVi: "Điều kiện chuẩn theo SGK Kết nối tri thức" }
+          ],
+          toFind: {
+            requirementEn: "Valid solution value or statement",
+            requirementVi: "Giá trị nghiệm hoặc khẳng định đúng"
+          },
+          options: [
+            { label: "A", text: "Giá trị x = 0 hoặc không xác định", isCorrect: false },
+            { label: "B", text: "Giá trị đại lượng thỏa mãn điều kiện tối ưu bài toán", isCorrect: true },
+            { label: "C", text: "Biểu thức nhận giá trị âm", isCorrect: false },
+            { label: "D", text: "Không có giá trị nào thỏa mãn", isCorrect: false },
+          ],
+          correctAnswer: "B",
+          acceptedAnswerFormats: ["B", "b"],
+          keyVocabulary: [
+            { word: "feasible value", phonetic: "/ˈfiː.zə.bəl ˈvæl.juː/", meaning: "giá trị khả thi / phù hợp", mathContext: "Giá trị nằm trong tập xác định." },
+            { word: "optimal", phonetic: "/ˈɒp.tɪ.məl/", meaning: "tối ưu", mathContext: "Giá trị lớn nhất hoặc nhỏ nhất thỏa mãn hệ." }
+          ],
+          socraticSteps: [
+            "Bóc tách các đại lượng đã cho (Given) và yêu cầu cần tìm (To Find).",
+            "Thiết lập phương trình hoặc bất đẳng thức tương ứng theo định lý trong SGK.",
+            "Đối chiếu các phương án A, B, C, D để chọn đáp án đúng."
+          ],
+          commonPitfall: "Đọc lướt bỏ qua các từ khóa điều kiện như 'at least', 'greater than' hoặc đơn vị đo."
+        };
       }
 
       if (probData) {

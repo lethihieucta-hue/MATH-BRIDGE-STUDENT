@@ -198,23 +198,75 @@ export const Level3EssayStudio: React.FC<Level3EssayStudioProps> = ({
 
       // 2. Fallback to backend API
       if (!probData) {
-        const res = await fetch("/api/tutor/generate-problem", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            stage: 5,
-            topic: chapterName,
-            exam: "SGK Kết nối tri thức",
-            difficulty: "Hard",
-          }),
-        });
+        try {
+          const res = await fetch("/api/tutor/generate-problem", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              stage: 5,
+              topic: chapterName,
+              exam: "SGK Kết nối tri thức",
+              difficulty: "Hard",
+            }),
+          });
 
-        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
-          const data = await res.json();
-          if (data.success && data.data) {
-            probData = data.data;
+          if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+            const data = await res.json();
+            if (data.success && data.data) {
+              probData = data.data;
+            }
           }
+        } catch (fetchErr) {
+          console.warn("Backend fetch failed, using offline fallback:", fetchErr);
         }
+      }
+
+      // 3. Fallback instant essay problem if AI is offline
+      if (!probData) {
+        probData = {
+          title: `Chuyên đề Tự luận: ${chapterName}`,
+          topic: chapterName,
+          exam: "SGK Kết nối tri thức",
+          stage: 5,
+          difficulty: "Hard",
+          questionEnglish: `In the study of "${chapterName}" (Grade ${selectedGrade}), analyze the given mathematical conditions and construct a rigorous step-by-step analytical proof and computation in academic English. Justify all intermediate algebraic steps with standard theorems.`,
+          questionVietnamese: `Trong chủ đề "${chapterName}" (Toán Lớp ${selectedGrade}), hãy phân tích các giả thiết bài toán và trình bày lời giải tự luận chi tiết từng bước bằng tiếng Anh học thuật. Nêu rõ các định lý và tính chất áp dụng.`,
+          givenParameters: [
+            { label: "Core Topic", value: chapterName, meaningVi: `Chủ đề trọng tâm trong SGK Kết nối tri thức Lớp ${selectedGrade}` },
+            { label: "Requirements", value: "Rigorous analytical proof in English", meaningVi: "Chứng minh và lập luận chặt chẽ bằng tiếng Anh" }
+          ],
+          toFind: {
+            requirementEn: "Complete mathematical reasoning and concluding statement",
+            requirementVi: "Lời giải logic hoàn chỉnh và kết luận bài toán"
+          },
+          keyVocabulary: [
+            { word: "therefore / hence", phonetic: "/ˈðeə.fɔːr/", meaning: "do đó, vì vậy", mathContext: "Từ nối học thuật chuyển ý kết luận." },
+            { word: "substituting into", phonetic: "/ˈsʌb.stɪ.tʃuːt/", meaning: "thay giá trị vào biểu thức", mathContext: "Thế biến số vào phương trình." },
+            { word: "satisfying condition", phonetic: "/ˈsæt.ɪs.faɪ.ɪŋ/", meaning: "thỏa mãn điều kiện bài toán", mathContext: "Nghiệm phù hợp với tập xác định." }
+          ],
+          socraticSteps: [
+            "Step 1: State the given constraints and assign appropriate algebraic variables.",
+            "Step 2: Apply the fundamental curriculum formulas related to " + chapterName + ".",
+            "Step 3: Solve the derived equation and verify domain restrictions.",
+            "Step 4: Formulate a formal conclusion sentence."
+          ],
+          commonPitfall: "Thiếu các từ nối học thuật (Therefore, Hence, Since) và không kiểm tra lại điều kiện tập xác định.",
+          exemplaryEssay: `Let the problem variables be formally defined according to the conditions of ${chapterName}.
+
+Step 1: Problem Formulation and Assumptions
+We establish the baseline mathematical model based on the core curriculum theorems. Let x represent the principal quantity under examination.
+All domain restrictions require x to belong to the designated interval.
+
+Step 2: Algebraic Derivation and Manipulation
+Applying standard properties and algebraic identities:
+We transform the governing equations step by step to isolate the target variable.
+
+Step 3: Verification of Extremal / Optimal Conditions
+Evaluating the intermediate results against the physical boundaries confirms that the solution is both unique and strictly valid.
+
+Conclusion:
+Therefore, the mathematical conditions are rigorously satisfied, completing the analytical demonstration. Q.E.D.`
+        };
       }
 
       if (probData) {

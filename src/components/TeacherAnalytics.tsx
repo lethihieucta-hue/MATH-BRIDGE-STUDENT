@@ -54,7 +54,7 @@ export const TeacherAnalytics: React.FC<TeacherAnalyticsProps> = ({
   const exportReport = () => {
     const report = `
 =========================================
-AI MATH BRIDGE - LEARNING ANALYTICS REPORT
+MATH BRIDGE AI STUDENT - LEARNING ANALYTICS REPORT
 =========================================
 Thời gian xuất: ${new Date().toLocaleString("vi-VN")}
 Stage hiện tại: Stage ${userProgress.currentStage}

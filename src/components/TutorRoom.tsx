@@ -24,7 +24,7 @@ import { STAGE_DEFINITIONS } from "../data/stages";
 import { ChatMessage, LearningStage, PracticeProblem, UserProgress } from "../types";
 import { SmartHoverText } from "./SmartHoverText";
 import { MathRenderer, RichMathText } from "./MathRenderer";
-import { chatWithTutorAI, getStoredApiKey } from "../services/geminiService";
+import { chatWithTutorAI, generatePracticeProblemAI, getStoredApiKey } from "../services/geminiService";
 
 interface TutorRoomProps {
   currentStage: LearningStage;
@@ -39,7 +39,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     role: "assistant",
     stage: 4,
     timestamp: "Vừa xong",
-    content: `Chào em! Thầy là **AI Math Bridge Specialized Tutor** – Trợ giảng ảo chuyên sâu về Toán học Quốc tế và Ngôn ngữ học thuật.
+    content: `Chào em! Thầy là **Math Bridge AI Student Tutor** – Trợ giảng ảo chuyên sâu về Toán học Song ngữ THPT và Ngôn ngữ học thuật.
 
 Nhiệm vụ của thầy là giúp em **vượt qua mọi rào cản từ vựng và cấu trúc tiếng Anh**, xây dựng tư duy toán học chuẩn quốc tế (SAT/AP/A-Level) theo phương pháp **Socratic & Dual-Coding (Mã hóa kép)**.
 
@@ -220,27 +220,52 @@ export const TutorRoom: React.FC<TutorRoomProps> = ({
   const handleGenerateProblem = async () => {
     setIsGeneratingProblem(true);
     try {
-      const res = await fetch("/api/tutor/generate-problem", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          stage: currentStage,
-          topic: targetExam === "AP Calculus" ? "Calculus" : "Algebra",
-          exam: targetExam,
-          difficulty: currentStage >= 5 ? "Hard" : "Medium",
-        }),
-      });
+      const topicName = targetExam === "AP Calculus" ? "Calculus" : "Algebra";
+      const diffLevel = currentStage >= 5 ? "Hard" : "Medium";
+      let generatedProblemData: any = null;
 
-      if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
-        const json = await res.json();
-        if (json.success && json.data) {
-          setSelectedProblem(json.data);
-          setSelectedOption(null);
-          confetti({ particleCount: 30, spread: 60 });
+      // 1. Try direct Client-Side Gemini call if API key is stored
+      if (getStoredApiKey()) {
+        try {
+          generatedProblemData = await generatePracticeProblemAI(
+            currentStage,
+            topicName,
+            targetExam,
+            diffLevel
+          );
+        } catch (clientErr) {
+          console.warn("Client problem generation failed, falling back to server:", clientErr);
         }
       }
+
+      // 2. Fallback to server endpoint if needed
+      if (!generatedProblemData) {
+        const res = await fetch("/api/tutor/generate-problem", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            stage: currentStage,
+            topic: topicName,
+            exam: targetExam,
+            difficulty: diffLevel,
+          }),
+        });
+
+        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+          const json = await res.json();
+          if (json.success && json.data) {
+            generatedProblemData = json.data;
+          }
+        }
+      }
+
+      if (generatedProblemData) {
+        setSelectedProblem(generatedProblemData);
+        setSelectedOption(null);
+        confetti({ particleCount: 30, spread: 60 });
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Generate problem error:", err);
     } finally {
       setIsGeneratingProblem(false);
     }
@@ -475,7 +500,7 @@ export const TutorRoom: React.FC<TutorRoomProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-extrabold text-slate-900 text-sm">AI Math Bridge Specialized Tutor</h3>
+                <h3 className="font-extrabold text-slate-900 text-sm">Math Bridge AI Student Tutor</h3>
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               </div>
               <p className="text-[11px] text-slate-500">

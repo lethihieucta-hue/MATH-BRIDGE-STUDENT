@@ -8,9 +8,10 @@ import {
 } from "../types";
 
 export type GeminiModelId =
-  | "gemini-3-flash-preview"
-  | "gemini-3-pro-preview"
-  | "gemini-2.5-flash";
+  | "gemini-2.5-flash"
+  | "gemini-2.5-pro"
+  | "gemini-2.0-flash"
+  | "gemini-1.5-flash";
 
 export interface ModelOption {
   id: GeminiModelId;
@@ -22,30 +23,37 @@ export interface ModelOption {
 
 export const AVAILABLE_MODELS: ModelOption[] = [
   {
-    id: "gemini-3-flash-preview",
-    name: "Gemini 3 Flash Preview",
+    id: "gemini-2.5-flash",
+    name: "Gemini 2.5 Flash",
     badge: "Mặc định (Nhanh & Tối ưu)",
-    description: "Tốc độ phản hồi cực nhanh, độ trễ thấp, lý tưởng cho Minigame, Socratic hint và sinh đề nhanh.",
+    description: "Tốc độ phản hồi cực nhanh, tư duy logic chính xác, tối ưu cho Minigame, Socratic hint và sinh đề thi.",
     isDefault: true,
   },
   {
-    id: "gemini-3-pro-preview",
-    name: "Gemini 3 Pro Preview",
+    id: "gemini-2.5-pro",
+    name: "Gemini 2.5 Pro",
     badge: "Suy luận chuyên sâu",
     description: "Tư duy logic toán học phức tạp, giải quyết các bài toán tự luận SAT/AP/A-Level khó.",
   },
   {
-    id: "gemini-2.5-flash",
-    name: "Gemini 2.5 Flash",
+    id: "gemini-2.0-flash",
+    name: "Gemini 2.0 Flash",
+    badge: "Siêu tốc độ",
+    description: "Độ trễ phản hồi cực thấp, xử lý tác vụ tương tác thời gian thực.",
+  },
+  {
+    id: "gemini-1.5-flash",
+    name: "Gemini 1.5 Flash",
     badge: "Dự phòng ổn định",
     description: "Model dự phòng có độ ổn định cao và hạn mức request linh hoạt.",
   },
 ];
 
 const FALLBACK_CHAIN: GeminiModelId[] = [
-  "gemini-3-flash-preview",
-  "gemini-3-pro-preview",
   "gemini-2.5-flash",
+  "gemini-2.5-pro",
+  "gemini-2.0-flash",
+  "gemini-1.5-flash",
 ];
 
 const STORAGE_KEY_API_KEY = "gemini_api_key";
@@ -64,12 +72,12 @@ export function setStoredApiKey(key: string): void {
 }
 
 export function getStoredModel(): GeminiModelId {
-  if (typeof window === "undefined") return "gemini-3-flash-preview";
+  if (typeof window === "undefined") return "gemini-2.5-flash";
   const saved = localStorage.getItem(STORAGE_KEY_MODEL) as GeminiModelId;
   if (saved && FALLBACK_CHAIN.includes(saved)) {
     return saved;
   }
-  return "gemini-3-flash-preview";
+  return "gemini-2.5-flash";
 }
 
 export function setStoredModel(model: GeminiModelId): void {
@@ -175,23 +183,33 @@ export async function testGeminiApiKey(apiKey: string): Promise<boolean> {
   try {
     const ai = createGenAIClient(apiKey);
     const res = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.5-flash",
       contents: "Reply with 'OK' only.",
       config: { maxOutputTokens: 10 },
     });
     return !!res.text;
   } catch (e) {
-    // If flash-preview fails, try 2.5-flash
+    // If 2.5-flash fails, try 2.0-flash
     try {
       const ai = createGenAIClient(apiKey);
       const res = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-2.0-flash",
         contents: "Reply with 'OK' only.",
         config: { maxOutputTokens: 10 },
       });
       return !!res.text;
     } catch (err2) {
-      return false;
+      try {
+        const ai = createGenAIClient(apiKey);
+        const res = await ai.models.generateContent({
+          model: "gemini-1.5-flash",
+          contents: "Reply with 'OK' only.",
+          config: { maxOutputTokens: 10 },
+        });
+        return !!res.text;
+      } catch (err3) {
+        return false;
+      }
     }
   }
 }
@@ -379,7 +397,7 @@ export async function chatWithTutorAI(
   onStatusUpdate?: (status: string) => void
 ): Promise<string> {
   const systemInstruction = `
-You are the **AI Math Bridge Socratic Tutor** – Trợ giảng ảo chuyên gia Toán song ngữ THPT.
+You are the **Math Bridge AI Student Socratic Tutor** – Trợ giảng ảo chuyên gia Toán song ngữ THPT.
 Nhiệm vụ: Dùng phương pháp gợi mở Socratic, phân tách rào cản ngôn ngữ và tư duy toán.
 Cấu trúc phản hồi BẮT BUỘC:
 ### 1. Diagnostic (Chẩn đoán)

@@ -33,7 +33,7 @@ export function exportVocabToPowerPoint(
               </span>
             </div>
             <div style="color: #cbd5e1; font-size: 14px; font-weight: bold;">
-              Math Bridge AI Flashcard
+              Math Bridge AI Student Flashcard
             </div>
           </div>
 
@@ -117,7 +117,7 @@ export function exportVocabToPowerPoint(
           xmlns="http://www.w3.org/TR/REC-html40">
     <head>
       <meta charset="utf-8">
-      <title>Math Bridge AI - Slide Từ Vựng Toán Lớp ${gradeLevel}</title>
+      <title>Math Bridge AI Student - Slide Từ Vựng Toán Lớp ${gradeLevel}</title>
       <style>
         @page {
           size: 1000px 562px;
@@ -143,7 +143,7 @@ export function exportVocabToPowerPoint(
           Bộ sưu tập ${terms.length} thuật ngữ then chốt Lớp ${gradeLevel} chuẩn SGK Kết nối tri thức & Khung Quốc tế SAT/AP
         </p>
         <div style="display: flex; gap: 20px; font-size: 14px; color: #94a3b8;">
-          <span>🏫 Math Bridge AI</span>
+          <span>🏫 Math Bridge AI Student</span>
           <span>•</span>
           <span>📅 Năm học 2025 - 2026</span>
           <span>•</span>

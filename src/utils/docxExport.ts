@@ -160,7 +160,7 @@ export function exportExamToWord(exam: AIExamData): void {
         <tr>
           <td style="width: 50%; vertical-align: top; text-align: center; font-size: 10pt;">
             <b>BỘ GIÁO DỤC VÀ ĐÀO TẠO</b><br/>
-            <b>DỰ ÁN MATH BRIDGE AI - THPT</b><br/>
+            <b>DỰ ÁN MATH BRIDGE AI STUDENT - THPT</b><br/>
             <i>Chương trình KNTT & Quốc tế</i>
           </td>
           <td style="width: 50%; vertical-align: top; text-align: center; font-size: 10pt;">
@@ -226,7 +226,7 @@ export function exportExamToWord(exam: AIExamData): void {
 
       <!-- Footer Note -->
       <div style="text-align: center; margin-top: 30px; font-size: 9.5pt; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px;">
-        Đề thi được biên soạn và xuất bản tự động bởi Hệ thống Math Bridge AI - Phù hợp chuẩn SGK KNTT & SAT Math.
+        Đề thi được biên soạn và xuất bản tự động bởi Hệ thống Math Bridge AI Student - Phù hợp chuẩn SGK KNTT & SAT Math.
       </div>
     </body>
     </html>
