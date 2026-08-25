@@ -160,23 +160,27 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
   const handleAIGenerateForTopic = async () => {
     setIsGeneratingProblem(true);
     try {
-      let chapterName = "Hàm số và Phương trình";
-      if (selectedChapterId !== "all") {
-        const ch = getChapterById(selectedChapterId);
-        if (ch) chapterName = ch.chapterTitleVi;
-      }
+      // Determine active target chapter
+      let targetChapterId = selectedChapterId !== "all" ? selectedChapterId : (activeProblem?.chapterId || availableChapters[0]?.id || "g10_c1");
+      const ch = getChapterById(targetChapterId) || availableChapters[0];
+      const chapterName = ch ? ch.chapterTitleVi : "Chương trình Toán THPT";
+      const chapterTopics = ch?.keyTopics || [];
 
       let probData: any = null;
 
       // 1. Try client direct call with fallback chain if API key exists
       if (getStoredApiKey()) {
         try {
-          probData = await generatePracticeProblemAI(
-            3,
-            chapterName,
-            "SGK Kết nối tri thức",
-            "Medium"
-          );
+          probData = await generatePracticeProblemAI({
+            gradeLevel: selectedGrade,
+            chapterId: targetChapterId,
+            chapterTitleVi: chapterName,
+            keyTopics: chapterTopics,
+            level: 2,
+            stage: 3,
+            exam: "SGK Kết nối tri thức với cuộc sống",
+            difficulty: "Medium",
+          });
         } catch (clientErr) {
           console.warn("Client problem generation failed, trying backend fallback:", clientErr);
         }
@@ -189,9 +193,13 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+              gradeLevel: selectedGrade,
+              chapterId: targetChapterId,
+              chapterTitleVi: chapterName,
+              keyTopics: chapterTopics,
+              level: 2,
               stage: 3,
-              topic: chapterName,
-              exam: "SGK Kết nối tri thức",
+              exam: "SGK Kết nối tri thức với cuộc sống",
               difficulty: "Medium",
             }),
           });
@@ -210,8 +218,11 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
       // 3. Fallback instant problem if AI is offline
       if (!probData) {
         probData = {
-          title: `Bài Toán Đọc Hiểu: ${chapterName}`,
+          title: `Practice: ${chapterName}`,
           topic: chapterName,
+          chapterId: targetChapterId,
+          gradeLevel: selectedGrade,
+          level: 2,
           exam: "SGK Kết nối tri thức",
           stage: 3,
           difficulty: "Medium",
@@ -226,13 +237,18 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
             requirementVi: "Giá trị nghiệm hoặc khẳng định đúng"
           },
           options: [
-            { label: "A", text: "Giá trị x = 0 hoặc không xác định", isCorrect: false },
-            { label: "B", text: "Giá trị đại lượng thỏa mãn điều kiện tối ưu bài toán", isCorrect: true },
+            { label: "A", text: "Giá trị đại lượng thỏa mãn điều kiện tối ưu bài toán", isCorrect: true },
+            { label: "B", text: "Giá trị x = 0 hoặc không xác định", isCorrect: false },
             { label: "C", text: "Biểu thức nhận giá trị âm", isCorrect: false },
             { label: "D", text: "Không có giá trị nào thỏa mãn", isCorrect: false },
           ],
-          correctAnswer: "B",
-          acceptedAnswerFormats: ["B", "b"],
+          correctAnswer: "A",
+          acceptedAnswerFormats: ["A", "a"],
+          solutionSteps: [
+            "Bước 1: Bóc tách các đại lượng đã cho (Given) và yêu cầu cần tìm (To Find).",
+            "Bước 2: Thiết lập phương trình hoặc biểu thức giải tích tương ứng theo định lý trong SGK.",
+            "Bước 3: Đối chiếu các phương án A, B, C, D để chọn đáp án đúng."
+          ],
           keyVocabulary: [
             { word: "feasible value", phonetic: "/ˈfiː.zə.bəl ˈvæl.juː/", meaning: "giá trị khả thi / phù hợp", mathContext: "Giá trị nằm trong tập xác định." },
             { word: "optimal", phonetic: "/ˈɒp.tɪ.məl/", meaning: "tối ưu", mathContext: "Giá trị lớn nhất hoặc nhỏ nhất thỏa mãn hệ." }
@@ -251,7 +267,7 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
           ...probData,
           id: `gen_prob_${Date.now()}`,
           gradeLevel: selectedGrade,
-          chapterId: selectedChapterId === "all" ? availableChapters[0]?.id : selectedChapterId,
+          chapterId: targetChapterId,
           level: 2,
         };
         setCustomGeneratedProblems((prev) => [newProb, ...prev]);

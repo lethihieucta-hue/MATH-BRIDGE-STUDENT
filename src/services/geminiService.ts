@@ -477,57 +477,120 @@ Hãy trả về JSON có cấu trúc sau:
 }
 
 /**
- * Generate Practice Problem for Level 2 & Level 3
+ * Generate Practice Problem for Level 2 & Level 3 strictly matching KNTT Curriculum
  */
-export async function generatePracticeProblemAI(
-  stage: number,
-  topic: string,
-  exam: string = "SGK Kết nối tri thức",
-  difficulty: "Easy" | "Medium" | "Hard" = "Medium",
-  onStatusUpdate?: (status: string) => void
-): Promise<any> {
-  const prompt = `
-Tạo 1 bài toán thực tế chuẩn phong cách ${exam} (${topic}, độ khó ${difficulty}) tối ưu cho học sinh ở Stage ${stage}/6.
-Stage ${stage} đặc điểm:
-${
-  stage <= 2
-    ? "Tập trung động từ chỉ lệnh, cấu trúc câu đơn giản, có kèm hình ảnh/sơ đồ mô tả"
-    : stage <= 4
-    ? "Song ngữ hoặc có bảng đối chiếu từ vựng khó, bài toán thực tế kết hợp toán & từ vựng chuyên ngành"
-    : "Chuẩn tiếng Anh học thuật 100% SAT/AP, từ vựng chuẩn xác, câu hỏi bẫy logic"
-}
+export async function generatePracticeProblemAI(params: {
+  gradeLevel: HighSchoolGrade;
+  chapterId: string;
+  chapterTitleVi: string;
+  keyTopics?: string[];
+  level: 2 | 3;
+  stage?: number;
+  exam?: string;
+  difficulty?: "Easy" | "Medium" | "Hard";
+  onStatusUpdate?: (status: string) => void;
+}): Promise<any> {
+  const {
+    gradeLevel,
+    chapterId,
+    chapterTitleVi,
+    keyTopics = [],
+    level,
+    stage = level === 2 ? 3 : 5,
+    exam = "SGK Kết nối tri thức với cuộc sống",
+    difficulty = level === 2 ? "Medium" : "Hard",
+    onStatusUpdate,
+  } = params;
 
-Hãy trả về JSON:
+  const topicsList = keyTopics.length > 0 ? keyTopics.join(", ") : chapterTitleVi;
+
+  const levelSpecificInstruction =
+    level === 2
+      ? `
+Yêu cầu bài toán Level 2 (Đọc hiểu đề & Bóc tách tham số & Trắc nghiệm 4 lựa chọn):
+- Đề bài song ngữ chất lượng cao (Tiếng Anh chuẩn quốc tế và bản dịch Tiếng Việt chuẩn SGK).
+- Có mảng "givenParameters": [{ "label": "tên đại lượng", "value": "giá trị toán học/công thức", "meaningVi": "ý nghĩa tiếng Việt" }].
+- Có "toFind": { "requirementEn": "yêu cầu cần tìm bằng tiếng Anh", "requirementVi": "yêu cầu cần tìm bằng tiếng Việt" }.
+- Có 4 "options" A, B, C, D rõ ràng (chỉ 1 đáp án đúng).
+- Có "correctAnswer" là "A", "B", "C" hoặc "D".
+- Có "solutionSteps": các bước giải toán cụ thể có công thức LaTeX.
+`
+      : `
+Yêu cầu bài toán Level 3 (Tự luận Toán tiếng Anh chuyên sâu & Barem chấm điểm):
+- Đề bài tự luận yêu cầu chứng minh hoặc mô hình hóa toán học thực tế bằng tiếng Anh học thuật.
+- Có "exemplaryEssay": Bài luận toán giải mẫu hoàn chỉnh bằng Tiếng Anh học thuật cao cấp (kèm công thức KaTeX/LaTeX, có các bước Step 1, Step 2, Conclusion rõ ràng).
+`;
+
+  const prompt = `
+Bạn là Chuyên gia Biên soạn Đề thi và Học liệu Toán học THPT theo chương trình Sách Giáo Khoa "Kết nối tri thức với cuộc sống" kết hợp chuẩn quốc tế SAT / AP / Cambridge A-Level.
+Hãy tạo 1 bài toán chuẩn xác 100% thuộc chương trình Lớp ${gradeLevel}:
+- Khối lớp: Lớp ${gradeLevel}
+- Chương học: ${chapterTitleVi} (Mã chương: ${chapterId})
+- Các chủ đề cốt lõi trong chương: ${topicsList}
+- Cấp độ bài tập: Level ${level} (${level === 2 ? "Đọc hiểu đề & Trắc nghiệm" : "Tự luận toán Tiếng Anh"})
+- Độ khó: ${difficulty} (Stage ${stage}/6)
+
+${levelSpecificInstruction}
+
+Yêu cầu chung:
+1. Nội dung bài toán PHẢI CHÍNH XÁC 100% thuộc kiến thức Toán Lớp ${gradeLevel} - Chương "${chapterTitleVi}". Tuyệt đối không tạo câu hỏi của chủ đề lớp khác.
+2. "keyVocabulary": 2-3 từ vựng toán học then chốt, là TỪ ĐƠN LẺ / CỤM TỪ NGUYÊN TỬ (không ghép nhiều khái niệm), ví dụ: 'vertical asymptote', 'local maximum', 'variance', 'dot product', 'conditional probability'.
+3. "socraticSteps": 3-4 câu hỏi gợi ý mở giàn giáo từng bước giúp học sinh tư duy.
+4. "commonPitfall": 1 bẫy ngôn ngữ hoặc bẫy logic toán điển hình mà học sinh hay mắc phải.
+
+Hãy trả về JSON DUY NHẤT theo schema:
 {
   "id": "gen_${Date.now()}",
-  "title": "Tiêu đề bài toán",
-  "topic": "${topic}",
+  "title": "Tiêu đề ngắn gọn của bài toán bằng tiếng Anh",
+  "topic": "${chapterTitleVi}",
+  "chapterId": "${chapterId}",
+  "gradeLevel": ${gradeLevel},
+  "level": ${level},
   "exam": "${exam}",
   "stage": ${stage},
   "difficulty": "${difficulty}",
-  "questionEnglish": "Đề bài tiếng Anh",
-  "questionVietnamese": "Bản dịch tiếng Việt chuẩn",
+  "questionEnglish": "Nội dung câu hỏi bài toán bằng tiếng Anh chuẩn học thuật",
+  "questionVietnamese": "Bản dịch tiếng Việt chính xác và tự nhiên",
+  "givenParameters": [
+    {"label": "Tên tham số", "value": "Giá trị", "meaningVi": "Giải nghĩa"}
+  ],
+  "toFind": {
+    "requirementEn": "Yêu cầu tiếng Anh",
+    "requirementVi": "Yêu cầu tiếng Việt"
+  },
   "options": [
-    {"label": "A", "text": "Lựa chọn A", "isCorrect": false},
-    {"label": "B", "text": "Lựa chọn B", "isCorrect": true},
-    {"label": "C", "text": "Lựa chọn C", "isCorrect": false},
-    {"label": "D", "text": "Lựa chọn D", "isCorrect": false}
+    {"label": "A", "text": "Phương án A", "isCorrect": false},
+    {"label": "B", "text": "Phương án B", "isCorrect": true},
+    {"label": "C", "text": "Phương án C", "isCorrect": false},
+    {"label": "D", "text": "Phương án D", "isCorrect": false}
   ],
   "correctAnswer": "B",
-  "keyVocabulary": [
-    {"word": "từ khóa 1", "phonetic": "/.../", "meaning": "nghĩa tiếng Việt", "mathContext": "ngữ cảnh toán"}
-  ],
-  "socraticSteps": [
+  "acceptedAnswerFormats": ["B"],
+  "solutionSteps": [
     "Bước 1: ...",
     "Bước 2: ...",
     "Bước 3: ..."
   ],
-  "commonPitfall": "Bẫy ngôn ngữ hoặc bẫy toán",
-  "exemplaryEssay": "Bài giải mẫu chi tiết"
+  "keyVocabulary": [
+    {
+      "word": "từ đơn lẻ",
+      "phonetic": "/phiên âm/",
+      "meaning": "nghĩa tiếng Việt",
+      "mathContext": "ngữ cảnh toán"
+    }
+  ],
+  "socraticSteps": [
+    "Gợi ý 1",
+    "Gợi ý 2"
+  ],
+  "commonPitfall": "Bẫy toán hoặc ngôn ngữ",
+  "exemplaryEssay": "Bài giải mẫu tiếng Anh đầy đủ (bắt buộc đối với Level 3)"
 }
 `;
 
-  const sysInstruction = "You are a specialized test-prep math author for Vietnamese Curriculum and International SAT/AP Math. Return valid JSON only.";
+  const sysInstruction =
+    "You are a specialized math author for Vietnamese High School Curriculum (KNTT) and International Math. Return valid JSON only.";
   const res = await callGeminiWithFallback<any>(prompt, sysInstruction, true, onStatusUpdate);
   return res.data;
 }
+

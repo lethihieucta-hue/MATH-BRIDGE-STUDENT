@@ -174,23 +174,27 @@ export const Level3EssayStudio: React.FC<Level3EssayStudioProps> = ({
   const handleAIGenerateEssayProblem = async () => {
     setIsGeneratingProblem(true);
     try {
-      let chapterName = "Hàm số và Phương trình";
-      if (selectedChapterId !== "all") {
-        const ch = getChapterById(selectedChapterId);
-        if (ch) chapterName = ch.chapterTitleVi;
-      }
+      // Determine active target chapter
+      let targetChapterId = selectedChapterId !== "all" ? selectedChapterId : (activeProblem?.chapterId || availableChapters[0]?.id || "g10_c1");
+      const ch = getChapterById(targetChapterId) || availableChapters[0];
+      const chapterName = ch ? ch.chapterTitleVi : "Chương trình Toán THPT";
+      const chapterTopics = ch?.keyTopics || [];
 
       let probData: any = null;
 
       // 1. Try client direct call with fallback chain if API key exists
       if (getStoredApiKey()) {
         try {
-          probData = await generatePracticeProblemAI(
-            5,
-            chapterName,
-            "SGK Kết nối tri thức",
-            "Hard"
-          );
+          probData = await generatePracticeProblemAI({
+            gradeLevel: selectedGrade,
+            chapterId: targetChapterId,
+            chapterTitleVi: chapterName,
+            keyTopics: chapterTopics,
+            level: 3,
+            stage: 5,
+            exam: "SGK Kết nối tri thức với cuộc sống",
+            difficulty: "Hard",
+          });
         } catch (clientErr) {
           console.warn("Client essay problem generation failed, trying backend fallback:", clientErr);
         }
@@ -203,9 +207,13 @@ export const Level3EssayStudio: React.FC<Level3EssayStudioProps> = ({
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+              gradeLevel: selectedGrade,
+              chapterId: targetChapterId,
+              chapterTitleVi: chapterName,
+              keyTopics: chapterTopics,
+              level: 3,
               stage: 5,
-              topic: chapterName,
-              exam: "SGK Kết nối tri thức",
+              exam: "SGK Kết nối tri thức với cuộc sống",
               difficulty: "Hard",
             }),
           });
@@ -224,8 +232,11 @@ export const Level3EssayStudio: React.FC<Level3EssayStudioProps> = ({
       // 3. Fallback instant essay problem if AI is offline
       if (!probData) {
         probData = {
-          title: `Chuyên đề Tự luận: ${chapterName}`,
+          title: `Analytical Proof: ${chapterName}`,
           topic: chapterName,
+          chapterId: targetChapterId,
+          gradeLevel: selectedGrade,
+          level: 3,
           exam: "SGK Kết nối tri thức",
           stage: 5,
           difficulty: "Hard",
@@ -274,7 +285,7 @@ Therefore, the mathematical conditions are rigorously satisfied, completing the 
           ...probData,
           id: `gen_essay_${Date.now()}`,
           gradeLevel: selectedGrade,
-          chapterId: selectedChapterId === "all" ? availableChapters[0]?.id : selectedChapterId,
+          chapterId: targetChapterId,
           level: 3,
         };
         setCustomGeneratedProblems((prev) => [newProb, ...prev]);

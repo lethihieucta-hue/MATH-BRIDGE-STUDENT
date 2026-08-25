@@ -241,49 +241,106 @@ Hãy trả về JSON có cấu trúc sau:
   }
 });
 
-// Generate Custom Practice Problem
+// Generate Custom Practice Problem for Level 2 & Level 3
 router.post("/tutor/generate-problem", async (req: Request, res: Response) => {
   try {
-    const { stage = 3, topic = "Algebra", exam = "SAT", difficulty = "Medium" } = req.body;
+    const {
+      gradeLevel = 10,
+      chapterId = "g10_c1",
+      chapterTitleVi = "Mệnh đề và tập hợp",
+      topic = "Mệnh đề và tập hợp",
+      keyTopics = [],
+      level = 2,
+      stage = level === 2 ? 3 : 5,
+      exam = "SGK Kết nối tri thức với cuộc sống",
+      difficulty = level === 2 ? "Medium" : "Hard",
+    } = req.body;
+
+    const activeTitle = chapterTitleVi || topic;
+    const topicsList = Array.isArray(keyTopics) && keyTopics.length > 0 ? keyTopics.join(", ") : activeTitle;
+
     const ai = getAI();
 
-    const prompt = `
-Tạo 1 bài toán thực tế chuẩn phong cách ${exam} (${topic}, độ khó ${difficulty}) tối ưu cho học sinh ở Stage ${stage}/6.
-Stage ${stage} đặc điểm:
-${
-  stage <= 2
-    ? "Tập trung động từ chỉ lệnh, cấu trúc câu đơn giản, có kèm hình ảnh/sơ đồ mô tả"
-    : stage <= 4
-    ? "Song ngữ hoặc có bảng đối chiếu từ vựng khó, bài toán thực tế kết hợp toán & từ vựng chuyên ngành"
-    : "Chuẩn tiếng Anh học thuật 100% SAT/AP, từ vựng chuẩn xác, câu hỏi bẫy logic"
-}
+    const levelPrompt =
+      level === 2
+        ? `
+Yêu cầu bài toán Level 2 (Đọc hiểu đề & Bóc tách tham số & Trắc nghiệm 4 lựa chọn):
+- Đề bài song ngữ chất lượng cao (Tiếng Anh chuẩn quốc tế và bản dịch Tiếng Việt chuẩn SGK).
+- Có mảng "givenParameters": [{ "label": "tên đại lượng", "value": "giá trị toán học/công thức", "meaningVi": "ý nghĩa tiếng Việt" }].
+- Có "toFind": { "requirementEn": "yêu cầu cần tìm bằng tiếng Anh", "requirementVi": "yêu cầu cần tìm bằng tiếng Việt" }.
+- Có 4 "options" A, B, C, D rõ ràng (chỉ 1 đáp án đúng).
+- Có "correctAnswer" là "A", "B", "C" hoặc "D".
+- Có "solutionSteps": các bước giải toán cụ thể có công thức LaTeX.
+`
+        : `
+Yêu cầu bài toán Level 3 (Tự luận Toán tiếng Anh chuyên sâu & Barem chấm điểm):
+- Đề bài tự luận yêu cầu chứng minh hoặc mô hình hóa toán học thực tế bằng tiếng Anh học thuật.
+- Có "exemplaryEssay": Bài luận toán giải mẫu hoàn chỉnh bằng Tiếng Anh học thuật cao cấp (kèm công thức KaTeX/LaTeX, có các bước Step 1, Step 2, Conclusion rõ ràng).
+`;
 
-Hãy trả về JSON:
+    const prompt = `
+Bạn là Chuyên gia Biên soạn Đề thi và Học liệu Toán học THPT theo chương trình Sách Giáo Khoa "Kết nối tri thức với cuộc sống" kết hợp chuẩn quốc tế SAT / AP / Cambridge A-Level.
+Hãy tạo 1 bài toán chuẩn xác 100% thuộc chương trình Lớp ${gradeLevel}:
+- Khối lớp: Lớp ${gradeLevel}
+- Chương học: ${activeTitle} (Mã chương: ${chapterId})
+- Các chủ đề cốt lõi trong chương: ${topicsList}
+- Cấp độ bài tập: Level ${level} (${level === 2 ? "Đọc hiểu đề & Trắc nghiệm" : "Tự luận toán Tiếng Anh"})
+- Độ khó: ${difficulty} (Stage ${stage}/6)
+
+${levelPrompt}
+
+Yêu cầu chung:
+1. Nội dung bài toán PHẢI CHÍNH XÁC 100% thuộc kiến thức Toán Lớp ${gradeLevel} - Chương "${activeTitle}".
+2. "keyVocabulary": 2-3 từ vựng toán học then chốt, là TỪ ĐƠN LẺ / CỤM TỪ NGUYÊN TỬ (không ghép nhiều khái niệm).
+3. "socraticSteps": 3-4 câu hỏi gợi ý mở giàn giáo từng bước giúp học sinh tư duy.
+4. "commonPitfall": 1 bẫy ngôn ngữ hoặc bẫy logic toán điển hình.
+
+Hãy trả về JSON DUY NHẤT theo schema:
 {
   "id": "gen_${Date.now()}",
-  "title": "Tiêu đề bài toán",
-  "topic": "${topic}",
+  "title": "Tiêu đề ngắn gọn bằng tiếng Anh",
+  "topic": "${activeTitle}",
+  "chapterId": "${chapterId}",
+  "gradeLevel": ${gradeLevel},
+  "level": ${level},
   "exam": "${exam}",
   "stage": ${stage},
   "difficulty": "${difficulty}",
-  "questionEnglish": "Đề bài tiếng Anh",
-  "questionVietnamese": "Bản dịch tiếng Việt (hoặc tóm tắt song ngữ)",
+  "questionEnglish": "Nội dung câu hỏi bài toán bằng tiếng Anh",
+  "questionVietnamese": "Bản dịch tiếng Việt chính xác",
+  "givenParameters": [
+    {"label": "Tên tham số", "value": "Giá trị", "meaningVi": "Giải nghĩa"}
+  ],
+  "toFind": {
+    "requirementEn": "Yêu cầu tiếng Anh",
+    "requirementVi": "Yêu cầu tiếng Việt"
+  },
   "options": [
-    {"label": "A", "text": "Lựa chọn A", "isCorrect": false},
-    {"label": "B", "text": "Lựa chọn B", "isCorrect": true},
-    {"label": "C", "text": "Lựa chọn C", "isCorrect": false},
-    {"label": "D", "text": "Lựa chọn D", "isCorrect": false}
+    {"label": "A", "text": "Phương án A", "isCorrect": false},
+    {"label": "B", "text": "Phương án B", "isCorrect": true},
+    {"label": "C", "text": "Phương án C", "isCorrect": false},
+    {"label": "D", "text": "Phương án D", "isCorrect": false}
   ],
   "correctAnswer": "B",
+  "acceptedAnswerFormats": ["B"],
+  "solutionSteps": [
+    "Bước 1: ...",
+    "Bước 2: ..."
+  ],
   "keyVocabulary": [
-    {"word": "từ khóa 1", "phonetic": "/.../", "meaning": "nghĩa tiếng Việt", "mathContext": "ngữ cảnh toán học"}
+    {
+      "word": "từ đơn lẻ",
+      "phonetic": "/phiên âm/",
+      "meaning": "nghĩa tiếng Việt",
+      "mathContext": "ngữ cảnh toán"
+    }
   ],
   "socraticSteps": [
-    "Bước 1: ...",
-    "Bước 2: ...",
-    "Bước 3: ..."
+    "Gợi ý 1",
+    "Gợi ý 2"
   ],
-  "commonPitfall": "Bẫy ngôn ngữ hoặc bẫy toán thường gặp"
+  "commonPitfall": "Bẫy toán hoặc ngôn ngữ",
+  "exemplaryEssay": "Bài giải mẫu tiếng Anh đầy đủ (cho Level 3)"
 }
 `;
 
@@ -291,7 +348,7 @@ Hãy trả về JSON:
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {
-        systemInstruction: "You are a specialized test-prep math author for SAT, AP Calculus, and A-Level. Return valid JSON only.",
+        systemInstruction: "You are a specialized test-prep math author for Vietnamese Curriculum and International SAT/AP Math. Return valid JSON only.",
         responseMimeType: "application/json",
       },
     });
