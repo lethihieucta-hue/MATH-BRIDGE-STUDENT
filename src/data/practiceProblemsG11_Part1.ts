@@ -1226,61 +1226,67 @@ Since |ψ| < 1, ψ^n → 0 rapidly as n → ∞. Therefore, F_n is strictly the 
   },
   {
     id: "prob_g11_l3_c2_2",
-    title: "Zeno's Dichotomy Paradox and Series Convergence Essay",
+    title: "Total Bouncing Distance of an Elastic Ball via Infinite Geometric Series (SGK KNTT)",
     topic: "Chương II: Dãy số, cấp số cộng và cấp số nhân",
     chapterId: "g11_c2",
     gradeLevel: 11,
     level: 3,
     exam: "SGK Kết nối tri thức",
     stage: 4,
-    difficulty: "Hard",
-    questionEnglish: "Write an academic philosophy-of-mathematics and calculus essay in English resolving Zeno's Dichotomy and Achilles and the Tortoise Paradoxes: prove using infinite geometric series summation ∑_{n=1}^∞ (1/2)^n = 1 that infinitely many sub-intervals can be traversed in a finite continuous duration of time.",
-    questionVietnamese: "Viết bài luận triết học toán học và giải tích bằng tiếng Anh giải quyết Nghịch lý Chia đôi (Dichotomy) và Asin đuổi Rùa của Zeno: chứng minh bằng tổng chuỗi cấp số nhân lùi vô hạn ∑_{n=1}^∞ (1/2)^n = 1 rằng vô hạn khoảng không gian con có thể được vượt qua trong một khoảng thời gian hữu hạn liên tục.",
+    difficulty: "Medium",
+    questionEnglish: "An elastic rubber ball is dropped vertically from an initial height of $h_0 = 10\\text{ m}$. After each bounce on the floor, the ball rebounds to a height equal to $\\frac{3}{4}$ of its previous height ($q = \\frac{3}{4}$). Assuming the bouncing motion continues indefinitely, write a complete mathematical essay in English: (1) Model the heights after successive bounces $h_1, h_2, \\dots, h_n$ as a geometric progression and state its general term $h_n$; (2) Show that the total vertical distance traveled by the ball until it comes to rest is $D = h_0 + 2\\sum_{n=1}^\\infty h_n$; (3) Apply the sum formula for an infinite decreasing geometric series $S = \\frac{u_1}{1 - q}$ to compute the exact total distance $D$ traveled.",
+    questionVietnamese: "Một quả bóng cao su có tính đàn hồi được thả rơi thẳng đứng từ độ cao ban đầu $h_0 = 10\\text{ m}$. Sau mỗi lần chạm đất, quả bóng nảy lên độ cao bằng $\\frac{3}{4}$ độ cao của lần rơi ngay trước đó ($q = \\frac{3}{4}$). Giả sử quá trình nảy tiếp diễn vô hạn lần, hãy viết bài tự luận toán học bằng tiếng Anh: (1) Mô hình hóa độ cao sau các lần nảy $h_1, h_2, \\dots, h_n$ dưới dạng cấp số nhân và xác định số hạng tổng quát $h_n$; (2) Chứng minh tổng quãng đường di chuyển thẳng đứng của quả bóng cho đến khi dừng lại là $D = h_0 + 2\\sum_{n=1}^\\infty h_n$; (3) Áp dụng công thức tổng cấp số nhân lùi vô hạn $S = \\frac{u_1}{1 - q}$ để tính chính xác tổng quãng đường $D$.",
     givenParameters: [
-      { label: "Zeno series", value: "∑_{n=1}^∞ (1/2)^n = 1/2 + 1/4 + 1/8 + ... = 1", meaningVi: "Chuỗi chia đôi không gian" }
+      { label: "Initial Height", value: "$h_0 = 10\\text{ m}$", meaningVi: "Độ cao thả ban đầu" },
+      { label: "Rebound Ratio", value: "$q = \\frac{3}{4} < 1$", meaningVi: "Tỉ số nảy lên (công bội)" }
     ],
     toFind: {
-      requirementEn: "Rigorous resolution of Zeno's paradoxes via calculus",
-      requirementVi: "Giải quyết nghịch lý Zeno bằng chuỗi số giải tích"
+      requirementEn: "Total distance traveled $D = h_0 + 2\\sum_{n=1}^\\infty h_n$",
+      requirementVi: "Tổng quãng đường bóng di chuyển D"
     },
     keyVocabulary: [
-      { word: "common ratio", phonetic: "/ˈkɒm.ən ˈreɪ.ʃi.əʊ/", meaning: "chuỗi cấp số nhân lùi vô hạn", mathContext: "Hội tụ về 1." }
+      { word: "geometric progression", phonetic: "/ˌdʒiː.əˈmet.rɪk prəˈɡreʃ.ən/", meaning: "cấp số nhân", mathContext: "Dãy số chiều cao nảy h_n." },
+      { word: "common ratio", phonetic: "/ˈkɒm.ən ˈreɪ.ʃi.əʊ/", meaning: "công bội q = 3/4", mathContext: "|q| < 1 (cấp số nhân lùi vô hạn)." },
+      { word: "sum of infinite geometric series", phonetic: "/sʌm əv ˈɪn.fɪ.nət ˌdʒiː.əˈmet.rɪk ˈsɪə.riːz/", meaning: "tổng cấp số nhân lùi vô hạn", mathContext: "S = u_1 / (1 - q)." }
     ],
     socraticSteps: [
-      "State Zeno's argument: to reach distance d, must first reach d/2, then d/4, etc.",
-      "Time taken t = ∑ (d / (2^n v)) = (d/v) ∑ (1/2)^n.",
-      "Calculate ∑_{n=1}^∞ (1/2)^n = (1/2) / (1 - 1/2) = 1.",
-      "Total time t = d/v is strictly finite."
+      "Initial fall: distance $h_0 = 10\\text{ m}$.",
+      "Bounce 1: goes UP $h_1 = 10 \\times \\frac{3}{4} = 7.5\\text{ m}$ and DOWN $h_1 = 7.5\\text{ m}$ (total $2 h_1$).",
+      "Bounce n: goes up and down $2 h_n = 2 \\times 10 \\times \\left(\\frac{3}{4}\\right)^n$.",
+      "Sum of bounces is an infinite decreasing geometric series: $\\sum_{n=1}^\\infty h_n = \\frac{h_1}{1 - q} = \\frac{7.5}{1 - 3/4} = \\frac{7.5}{0.25} = 30\\text{ m}$.",
+      "Total distance: $D = h_0 + 2 \\times 30 = 10 + 60 = 70\\text{ m}$."
     ],
-    commonPitfall: "Nhầm lẫn giữa vô hạn số bước chia (infinite count of steps) và tổng thời gian vô hạn (infinite duration).",
-    exemplaryEssay: `Mathematical Philosophy & Analysis: Resolution of Zeno's Paradoxes via Geometric Series Convergence
+    commonPitfall: "Quên nhân 2 cho các lần nảy (bóng phải đi LÊN rồi rơi XUỐNG ở mỗi chu kỳ sau cú nảy).",
+    exemplaryEssay: `Mathematical Modeling of an Elastic Bouncing Ball via Infinite Geometric Series
 
-1. Formulation of Zeno's Dichotomy Paradox (c. 450 BCE)
-The ancient Greek philosopher Zeno of Elea argued that motion is an illusion:
-To travel a total distance D at constant velocity v, a runner must first reach the midpoint D/2.
-Before reaching D/2, the runner must reach D/4, and before that D/8, ad infinitum.
-Zeno asserted that an infinite number of spatial tasks cannot be completed in any finite duration.
+1. Geometric Sequence Modeling of Rebound Heights
+Let $h_0 = 10\\text{ m}$ be the initial drop height.
+After the first impact with the ground, the ball rebounds to height:
+$h_1 = h_0 \\cdot q = 10 \\cdot \\frac{3}{4} = 7.5\\text{ m}$.
+After the second impact:
+$h_2 = h_1 \\cdot q = 10 \\cdot \\left(\\frac{3}{4}\\right)^2 = 5.625\\text{ m}$.
+In general, the height reached after the $n$-th bounce is:
+$h_n = h_0 \\cdot q^n = 10 \\cdot \\left(\\frac{3}{4}\\right)^n \\quad \\text{for } n \\ge 1$.
+The sequence $(h_n)$ is a geometric progression with first term $u_1 = h_1 = 7.5\\text{ m}$ and common ratio $q = \\frac{3}{4}$.
 
-2. Mathematical Modeling of Spatial and Temporal Partitions
-Let the total distance D be partitioned into an infinite sequence of dyadic sub-intervals:
-D = \\sum_{n=1}^\\infty d_n = \\frac{D}{2} + \\frac{D}{4} + \\frac{D}{8} + \\dots = D \\sum_{n=1}^\\infty \\left(\\frac{1}{2}\\right)^n.
+2. Formulation of the Total Vertical Distance Traveled
+The trajectory consists of:
+- The initial downward drop from height $h_0$: distance traveled is $h_0 = 10\\text{ m}$.
+- For every subsequent bounce $n \\ge 1$, the ball ascends to height $h_n$ and then falls back down through the same distance $h_n$, contributing $2 h_n$ meters.
 
-Assuming uniform velocity v, the time elapsed during the n-th interval is:
-t_n = \\frac{d_n}{v} = \\frac{D}{v \\cdot 2^n}.
+Therefore, the total cumulative distance $D$ traveled until the ball comes to rest is:
+$D = h_0 + 2 h_1 + 2 h_2 + 2 h_3 + \\dots = h_0 + 2 \\sum_{n=1}^\\infty h_n$.
 
-The total elapsed time is the infinite summation:
-T = \\sum_{n=1}^\\infty t_n = \\frac{D}{v} \\sum_{n=1}^\\infty \\left(\\frac{1}{2}\\right)^n.
+3. Summation of the Infinite Decreasing Geometric Series
+Since the common ratio satisfies $|q| = \\frac{3}{4} < 1$, the infinite series $\\sum_{n=1}^\\infty h_n$ converges to:
+$S = \\sum_{n=1}^\\infty h_n = \\frac{u_1}{1 - q} = \\frac{7.5}{1 - \\frac{3}{4}} = \\frac{7.5}{0.25} = 30\\text{ m}$.
 
-3. Analytical Summation of the Infinite Geometric Series
-The series S = \\sum_{n=1}^\\infty (1/2)^n is a geometric series with first term u₁ = 1/2 and common ratio q = 1/2 < 1.
-Applying the Cauchy limit theorem for partial sums S_N = \\sum_{n=1}^N (1/2)^n = 1 - (1/2)^N:
-S = \\lim_{N \\to \\infty} S_N = \\lim_{N \\to \\infty} \\left[1 - \\left(\\frac{1}{2}\\right)^N\\right] = 1 - 0 = 1.
-
-Therefore, the total time required is:
-T = \\frac{D}{v} \\cdot (1) = \\frac{D}{v}.
+4. Total Distance Evaluation and Physical Conclusion
+Substituting the infinite sum $S = 30\\text{ m}$ into the total distance expression:
+$D = h_0 + 2 S = 10 + 2(30) = 10 + 60 = 70\\text{ m}$.
 
 Conclusion:
-The paradox dissolves because the infinite sequence of durations forms a convergent series whose sum is strictly finite. An infinite collection of discrete sub-events occupies a finite continuum of space-time. ■`,
+Although the ball undergoes an infinite number of bounces in this ideal mathematical model, the total vertical distance traveled is strictly finite and equals exactly $70\\text{ m}$. ■`,
   },
   {
     id: "prob_g11_l3_c2_3",

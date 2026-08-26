@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Volume2, Sparkles, BookOpen, AlertCircle, X } from "lucide-react";
 import { MATH_TERMS } from "../data/mathTerms";
 import { MathTerm } from "../types";
-import { MathRenderer, RichMathText } from "./MathRenderer";
+import { MathRenderer, RichMathText, autoWrapMathInText } from "./MathRenderer";
 
 interface SmartHoverTextProps {
   text: string;
@@ -35,11 +35,8 @@ export const SmartHoverText: React.FC<SmartHoverTextProps> = ({
 
   // Parse text into tokens
   const renderTokens = () => {
-    // Pre-process text to wrap obvious informal formulas like `lim_{...} (...) / (...)` in $...$
-    const processed = text.replace(
-      /((?:\\lim|lim)_\{[^}]+\}\s*(?:\([^)]+\)|[a-zA-Z0-9^+-]+)\s*\/\s*(?:\([^)]+\)|[a-zA-Z0-9^+-]+))/g,
-      "$$$1$$"
-    );
+    // Pre-process text to wrap all untagged math formulas in $...$
+    const processed = autoWrapMathInText(text);
 
     // Support $$, $, \[, \( delimiters
     const delimiterRegex = /(\$\$[\s\S]+?\$\$|\$[^\$]+?\$|\\\[[\s\S]+?\\\]|\\\([\s\S]+?\\\))/g;

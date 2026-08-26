@@ -14,23 +14,23 @@ export const PRACTICE_PROBLEMS_G11_PART3: PracticeProblem[] = [
     exam: "SGK Kết nối tri thức",
     stage: 2,
     difficulty: "Easy",
-    questionEnglish: "In pyramid S.ABC, given that SA ⊥ AB and SA ⊥ AC. State the geometric relationship between edge SA and base plane (ABC).",
-    questionVietnamese: "Cho hình chóp S.ABC có cạnh bên SA vuông góc với AB và SA vuông góc với AC. Nêu mối quan hệ hình học giữa đường thẳng SA và mặt phẳng đáy (ABC).",
+    questionEnglish: "In pyramid $S.ABC$, given that $SA \\perp AB$ and $SA \\perp AC$. State the geometric relationship between edge $SA$ and base plane $(ABC)$.",
+    questionVietnamese: "Cho hình chóp $S.ABC$ có cạnh bên $SA$ vuông góc với $AB$ và $SA$ vuông góc với $AC$. Nêu mối quan hệ hình học giữa đường thẳng $SA$ và mặt phẳng đáy $(ABC)$.",
     givenParameters: [
-      { label: "Lines", value: "SA ⊥ AB, SA ⊥ AC (AB, AC ⊂ (ABC) cắt nhau tại A)", meaningVi: "SA vuông góc 2 đường cắt nhau" }
+      { label: "Lines", value: "$SA \\perp AB, \\; SA \\perp AC \\; (AB, AC \\subset (ABC))$", meaningVi: "SA vuông góc 2 đường cắt nhau" }
     ],
     toFind: {
-      requirementEn: "SA ⊥ (ABC)",
-      requirementVi: "Quan hệ giữa SA và mp (ABC)"
+      requirementEn: "Geometric relation of $SA$ to plane $(ABC)$",
+      requirementVi: "Quan hệ giữa đường thẳng SA và mp (ABC)"
     },
     options: [
-      { label: "A", text: "SA ⊥ (ABC) (đường thẳng SA vuông góc với mặt phẳng (ABC))", isCorrect: true },
-      { label: "B", text: "SA song song với (ABC)", isCorrect: false },
-      { label: "C", text: "SA xiên góc 45° với (ABC)", isCorrect: false },
-      { label: "D", text: "SA nằm trong (ABC)", isCorrect: false },
+      { label: "A", text: "$SA \\perp (ABC)$ (đường thẳng SA vuông góc với mặt phẳng (ABC))", isCorrect: true },
+      { label: "B", text: "$SA \\parallel (ABC)$ (SA song song với (ABC))", isCorrect: false },
+      { label: "C", text: "SA xiên góc $45^\\circ$ với $(ABC)$", isCorrect: false },
+      { label: "D", text: "$SA \\subset (ABC)$ (SA nằm trong (ABC))", isCorrect: false },
     ],
     correctAnswer: "A",
-    acceptedAnswerFormats: ["SA ⊥ (ABC)", "Vuong goc", "Perpendicular", "A"],
+    acceptedAnswerFormats: ["SA ⊥ (ABC)", "SA \\perp (ABC)", "Vuong goc", "Perpendicular", "A"],
     solutionSteps: [
       "Bước 1: Ta có SA ⊥ AB và SA ⊥ AC.",
       "Bước 2: Hai đường thẳng AB và AC cắt nhau tại A và cùng nằm trong mặt phẳng (ABC).",
@@ -1182,68 +1182,70 @@ Polar duality unifies the 5 Platonic solids into 3 fundamental symmetry equivale
   // LEVEL 3 ESSAYS (CHƯƠNG 8)
   {
     id: "prob_g11_l3_c8_1",
-    title: "Bayes' Theorem Derivation & Machine Learning Naive Bayes Essay",
+    title: "Two-Stage Quality Inspection via Probability Multiplication & Addition Rules (SGK KNTT)",
     topic: "Chương VIII: Các quy tắc tính xác suất",
     chapterId: "g11_c8",
     gradeLevel: 11,
     level: 3,
     exam: "SGK Kết nối tri thức",
     stage: 4,
-    difficulty: "Hard",
-    questionEnglish: "Write an academic artificial intelligence and statistical learning essay in English deriving Bayes' Rule: P(A_k | B) = [P(A_k) P(B | A_k)] / [∑_{i=1}^n P(A_i) P(B | A_i)]. Explain how this theorem provides the mathematical foundation for the Naive Bayes Classifier in NLP spam email filtering under the conditional independence assumption.",
-    questionVietnamese: "Viết bài luận trí tuệ nhân tạo và học thống kê bằng tiếng Anh suy dẫn Định lý Bayes: P(A_k | B) = [P(A_k) P(B | A_k)] / [∑_{i=1}^n P(A_i) P(B | A_i)]. Giải thích cách định lý thiết lập nền tảng toán học cho Thuật toán phân loại Naive Bayes trong lọc thư rác (Spam Filter) với giả định độc lập có điều kiện.",
+    difficulty: "Medium",
+    questionEnglish: "A modern automated electronics factory tests newly assembled microchips through two independent inspection stages. The probability that a chip passes the automated optical scanning (Stage 1) is $P(A) = 0.90$. The probability that it passes the high-voltage electrical conductivity test (Stage 2) is $P(B) = 0.85$. A chip is certified for export if and only if it passes both inspection stages. Write a comprehensive mathematical essay in English: (1) Formulate the independent event model and apply the Multiplication Rule to find the probability $P(A \\cap B)$ that a randomly chosen chip is certified; (2) Apply the complementary event rule to compute the probability $P(E)$ that a chip is defective (fails at least one test); (3) Apply the Addition Rule of Probability $P(A \\cup B)$ and explain its industrial engineering significance in quality assurance.",
+    questionVietnamese: "Một nhà máy sản xuất vi mạch điện tử tự động kiểm tra chất lượng linh kiện qua hai công đoạn độc lập. Xác suất vi mạch vượt qua máy quét quang học tự động (Vòng 1) là $P(A) = 0.90$. Xác suất vượt qua bài kiểm tra độ dẫn điện áp cao (Vòng 2) là $P(B) = 0.85$. Vi mạch chỉ được cấp chứng nhận xuất khẩu nếu vượt qua cả hai vòng kiểm tra. Viết bài tự luận toán học bằng tiếng Anh: (1) Thiết lập mô hình biến cố độc lập và áp dụng Quy tắc nhân xác suất để tính xác suất $P(A \\cap B)$ linh kiện được cấp chứng nhận xuất khẩu; (2) Áp dụng quy tắc biến cố đối để tính xác suất $P(E)$ linh kiện bị lỗi (trượt ít nhất một công đoạn); (3) Áp dụng Quy tắc cộng xác suất $P(A \\cup B)$ và giải thích ý nghĩa thực tiễn trong quản trị chất lượng sản xuất.",
     givenParameters: [
-      { label: "Bayes Formulation", value: "P(A_k | B) = P(A_k) P(B|A_k) / ∑ P(A_i) P(B|A_i)", meaningVi: "Công thức Bayes toàn phần" }
+      { label: "Optical Test (Stage 1)", value: "$P(A) = 0.90$", meaningVi: "Xác suất qua vòng 1" },
+      { label: "Electrical Test (Stage 2)", value: "$P(B) = 0.85$", meaningVi: "Xác suất qua vòng 2" },
+      { label: "Independence", value: "$A, B$ are independent events", meaningVi: "Hai biến cố độc lập" }
     ],
     toFind: {
-      requirementEn: "Rigorous derivation and NLP spam classification application",
-      requirementVi: "Suy dẫn định lý Bayes và ứng dụng phân loại thư rác"
+      requirementEn: "Joint probability $P(A \\cap B)$, failure probability $P(E)$, and union $P(A \\cup B)$",
+      requirementVi: "Xác suất đạt cả hai vòng, xác suất bị loại và xác suất hợp"
     },
     keyVocabulary: [
-      { word: "Bayes' theorem", phonetic: "/beɪz ˈθɪə.rəm/", meaning: "thuật toán Naive Bayes trong AI", mathContext: "P(Spam|words) ∝ P(Spam) ∏ P(word_i|Spam)." },
-      { word: "conditional probability", phonetic: "/kənˈdɪʃ.ən.əl ˌprɒb.əˈbɪl.ə.ti/", meaning: "xác suất hậu nghiệm (Posterior)", mathContext: "Posterior ∝ Prior × Likelihood." }
+      { word: "independent events", phonetic: "/ˌɪn.dɪˈpen.dənt ɪˈvents/", meaning: "hai biến cố độc lập", mathContext: "P(A ∩ B) = P(A) · P(B)." },
+      { word: "multiplication rule of probability", phonetic: "/ˌmʌl.tɪ.plɪˈkeɪ.ʃən ruːl/", meaning: "quy tắc nhân xác suất", mathContext: "Áp dụng cho chuỗi kiểm tra độc lập." },
+      { word: "complementary event", phonetic: "/ˌkɒm.plɪˈmen.tər.i ɪˈvent/", meaning: "biến cố đối", mathContext: "P(E) = 1 - P(A ∩ B)." }
     ],
     socraticSteps: [
-      "Use definition of conditional probability: P(A_k ∩ B) = P(A_k | B) P(B) = P(B | A_k) P(A_k).",
-      "Expand P(B) using Law of Total Probability: P(B) = ∑ P(A_i) P(B | A_i).",
-      "Apply to Spam filter: P(Spam | w₁, ..., w_n) ∝ P(Spam) ∏ P(w_i | Spam)."
+      "Since events A and B are independent, apply the Multiplication Rule: $P(A \\cap B) = P(A) \\cdot P(B) = 0.90 \\times 0.85 = 0.765$ (76.5%).",
+      "Failing at least one test is the complementary event of passing both tests: $P(E) = 1 - P(A \\cap B) = 1 - 0.765 = 0.235$ (23.5%).",
+      "Apply the general Addition Rule: $P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0.90 + 0.85 - 0.765 = 0.985$ (98.5%).",
+      "Explain the quality engineering conclusion: While individual pass rates are 90% and 85%, the multi-stage system yield drops to 76.5%."
     ],
-    commonPitfall: "Nhầm lẫn giữa xác suất tiền nghiệm (Prior P(A)) và xác suất hậu nghiệm (Posterior P(A|B)).",
-    exemplaryEssay: `Statistical Machine Learning Report: Formal Derivation of Bayes' Theorem and Naive Bayes Classification
+    commonPitfall: "Nhầm lẫn giữa xác suất vượt qua ít nhất một vòng P(A ∪ B) và xác suất vượt qua cả hai vòng P(A ∩ B).",
+    exemplaryEssay: `Industrial Quality Engineering Report: Probabilistic Yield Analysis via Multiplication and Addition Rules
 
-1. Formal Derivation of Bayes' Theorem
-Let {A₁, A₂, ..., A_n} be a partition of sample space Ω (mutually exclusive and exhaustive events, P(A_i) > 0).
-Let B be any observed evidence event with P(B) > 0.
+1. Mathematical Modeling of Independent Inspection Stages
+Let A denote the event that a manufactured microchip passes the automated optical scanning (Stage 1).
+Let B denote the event that the microchip passes the functional electrical conductivity test (Stage 2).
+From operational quality audit data:
+- Pass rate for Stage 1: $P(A) = 0.90$.
+- Pass rate for Stage 2: $P(B) = 0.85$.
+Since the physical mechanisms of optical defect scanning and electrical conductivity are completely decoupled, events A and B are statistically independent:
+$P(A \\cap B) = P(A) \\cdot P(B)$.
 
-By the definition of conditional probability:
-P(A_k \\cap B) = P(A_k \\mid B) \\cdot P(B) = P(B \\mid A_k) \\cdot P(A_k).
+2. Calculation of Fully Certified Export Yield via the Multiplication Rule
+A microchip qualifies for commercial shipment if and only if both independent inspection milestones are successfully achieved (the joint event $A \\cap B$):
+$$P(A \\cap B) = P(A) \\cdot P(B) = 0.90 \\times 0.85 = 0.765 \\quad (76.5\\%).$$
+Thus, the expected baseline yield of certified microchips is $76.5\\%$.
 
-Rearranging to isolate the Posterior Probability P(A_k | B):
-P(A_k \\mid B) = \\frac{P(B \\mid A_k) \\cdot P(A_k)}{P(B)}.
+3. Defect Analysis via the Complementary Event Rule
+Let E denote the event that a microchip fails quality assurance (fails at least one of the two stages).
+Event E is the exact logical complement of passing both inspection stages:
+$E = (A \\cap B)^c$.
+Applying the complementary event axiom:
+$$P(E) = 1 - P(A \\cap B) = 1 - 0.765 = 0.235 \\quad (23.5\\%).$$
+Approximately $23.5\\%$ of all fabricated units will be rejected or routed to recycling.
 
-By the Law of Total Probability, the marginal probability of evidence P(B) is:
-P(B) = \\sum_{i=1}^n P(B \\cap A_i) = \\sum_{i=1}^n P(A_i) \\cdot P(B \\mid A_i).
+4. Application of the Addition Rule of Probability
+The probability that a chip passes at least one of the two inspection stages is given by the union $A \\cup B$:
+$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$$
+Substituting the values:
+$$P(A \\cup B) = 0.90 + 0.85 - 0.765 = 1.75 - 0.765 = 0.985 \\quad (98.5\\%).$$
+This indicates that only $1.5\\%$ of microchips ($1 - 0.985 = 0.015$) fail both tests simultaneously.
 
-Substituting P(B) yields Bayes' Theorem:
-P(A_k \\mid B) = \\frac{P(A_k) \\cdot P(B \\mid A_k)}{\\sum_{i=1}^n P(A_i) \\cdot P(B \\mid A_i)} = \\frac{\\text{Prior} \\times \\text{Likelihood}}{\\text{Evidence / Normalizing Constant}}.
-
-2. Application: The Naive Bayes Spam Classification Algorithm
-In natural language processing (NLP), an email text is represented as a feature vector of words \\mathbf{w} = (w_1, w_2, \\dots, w_m).
-We classify the email into class C ∈ {Spam, Ham}:
-P(C \\mid \\mathbf{w}) = \\frac{P(C) \\cdot P(w_1, w_2, \\dots, w_m \\mid C)}{P(\\mathbf{w})}.
-
-3. The Conditional Independence Assumption ('Naive' Assumption)
-To avoid estimating joint probabilities over a high-dimensional vocabulary, the Naive Bayes model assumes that word occurrences are mutually conditionally independent given the class C:
-P(w_1, w_2, \\dots, w_m \\mid C) = \\prod_{j=1}^m P(w_j \\mid C).
-
-Thus, the classification decision rule is:
-\\hat{C} = \\arg\\max_{C \\in \\{\\text{Spam}, \\text{Ham}\\}} \\left[ P(C) \\prod_{j=1}^m P(w_j \\mid C) \\right].
-
-In computational implementation, numerical underflow is prevented by taking logarithms (Log-Likelihood):
-\\hat{C} = \\arg\\max_{C} \\left[ \\ln P(C) + \\sum_{j=1}^m \\ln P(w_j \\mid C) \\right].
-
-Conclusion:
-Bayes' Theorem provides the exact statistical framework translating prior domain knowledge and observed feature evidence into optimal probabilistic decisions. ■`,
+5. Industrial Management Conclusion
+Although both inspection stations boast high individual pass rates ($90\\%$ and $85\\%$), cascading independent quality gates compounds the rejection rate, resulting in an overall factory yield of $76.5\\%$. Quality engineers use this quantitative probability model to optimize manufacturing tolerances and budget scrap expenses. ■`,
   },
   {
     id: "prob_g11_l3_c8_2",
@@ -1514,35 +1516,35 @@ No dynamic betting strategy or stopping rule can transform a sub-fair stochastic
     exam: "SGK Kết nối tri thức",
     stage: 2,
     difficulty: "Easy",
-    questionEnglish: "Calculate the derivative of f(x) = 2x³ - 5x² + 4x - 7 and evaluate the tangent slope k = f'(2) at point x = 2.",
-    questionVietnamese: "Tính đạo hàm của hàm số f(x) = 2x³ - 5x² + 4x - 7 và tính hệ số góc tiếp tuyến k = f'(2) tại điểm có hoành độ x = 2.",
+    questionEnglish: "Calculate the derivative of $f(x) = 2x^3 - 5x^2 + 4x - 7$ and evaluate the tangent slope $k = f'(2)$ at point $x = 2$.",
+    questionVietnamese: "Tính đạo hàm của hàm số $f(x) = 2x^3 - 5x^2 + 4x - 7$ và tính hệ số góc tiếp tuyến $k = f'(2)$ tại điểm có hoành độ $x = 2$.",
     givenParameters: [
-      { label: "Function", value: "f(x) = 2x³ - 5x² + 4x - 7", meaningVi: "Hàm đa thức bậc 3" }
+      { label: "Function", value: "$f(x) = 2x^3 - 5x^2 + 4x - 7$", meaningVi: "Hàm đa thức bậc 3" }
     ],
     toFind: {
-      requirementEn: "f'(x) and f'(2)",
-      requirementVi: "Đạo hàm f'(x) và f'(2)"
+      requirementEn: "Derivative $f'(x)$ and slope $f'(2)$",
+      requirementVi: "Đạo hàm $f'(x)$ và $f'(2)$"
     },
     options: [
-      { label: "A", text: "f'(x) = 6x² - 10x + 4; f'(2) = 8", isCorrect: true },
-      { label: "B", text: "f'(x) = 6x² - 10x + 4; f'(2) = 12", isCorrect: false },
-      { label: "C", text: "f'(x) = 2x² - 5x + 4; f'(2) = 2", isCorrect: false },
-      { label: "D", text: "f'(x) = 6x² - 5x; f'(2) = 14", isCorrect: false },
+      { label: "A", text: "$f'(x) = 6x^2 - 10x + 4; \\; f'(2) = 8$", isCorrect: true },
+      { label: "B", text: "$f'(x) = 6x^2 - 10x + 4; \\; f'(2) = 12$", isCorrect: false },
+      { label: "C", text: "$f'(x) = 2x^2 - 5x + 4; \\; f'(2) = 2$", isCorrect: false },
+      { label: "D", text: "$f'(x) = 6x^2 - 5x; \\; f'(2) = 14$", isCorrect: false },
     ],
     correctAnswer: "A",
     acceptedAnswerFormats: ["f'(x)=6x^2-10x+4, f'(2)=8", "8", "A"],
     solutionSteps: [
-      "Bước 1: Áp dụng quy tắc đạo hàm: (x^n)' = n x^{n-1}.",
-      "Bước 2: f'(x) = 2(3x²) - 5(2x) + 4(1) - 0 = 6x² - 10x + 4.",
-      "Bước 3: Thay x = 2: f'(2) = 6(2²) - 10(2) + 4 = 24 - 20 + 4 = 8."
+      "Bước 1: Áp dụng quy tắc đạo hàm: $(x^n)' = n x^{n-1}$.",
+      "Bước 2: $f'(x) = 2(3x^2) - 5(2x) + 4(1) - 0 = 6x^2 - 10x + 4$.",
+      "Bước 3: Thay $x = 2$: $f'(2) = 6(2^2) - 10(2) + 4 = 24 - 20 + 4 = 8$."
     ],
     keyVocabulary: [
       { word: "derivative", phonetic: "/dɪˈrɪv.ə.tɪv/", meaning: "đạo hàm f'(x)", mathContext: "Hệ số góc tiếp tuyến tại điểm." },
       { word: "tangent line", phonetic: "/ˈtæn.dʒənt laɪn/", meaning: "tiếp tuyến đồ thị", mathContext: "k = f'(x₀)." }
     ],
     socraticSteps: [
-      "Tính đạo hàm từng số hạng: 6x² - 10x + 4.",
-      "Thay x = 2: 6(4) - 20 + 4 = 8."
+      "Tính đạo hàm từng số hạng: $6x^2 - 10x + 4$.",
+      "Thay $x = 2$: $6(4) - 20 + 4 = 8$."
     ],
     commonPitfall: "Nhầm đạo hàm hằng số (-7)' khác 0.",
     visualType: "function",
@@ -1557,27 +1559,27 @@ No dynamic betting strategy or stopping rule can transform a sub-fair stochastic
     exam: "SGK Kết nối tri thức",
     stage: 2,
     difficulty: "Easy",
-    questionEnglish: "Write the equation of the tangent line to the curve y = x³ - 3x + 2 at the point M(2, 4).",
-    questionVietnamese: "Viết phương trình tiếp tuyến của đồ thị hàm số y = x³ - 3x + 2 tại điểm M(2, 4).",
+    questionEnglish: "Write the equation of the tangent line to the curve $y = x^3 - 3x + 2$ at the point $M(2, 4)$.",
+    questionVietnamese: "Viết phương trình tiếp tuyến của đồ thị hàm số $y = x^3 - 3x + 2$ tại điểm $M(2, 4)$.",
     givenParameters: [
-      { label: "Curve & Point", value: "y = x³ - 3x + 2, M(2, 4)", meaningVi: "Hàm số và tiếp điểm" }
+      { label: "Curve & Point", value: "$y = x^3 - 3x + 2, \\; M(2, 4)$", meaningVi: "Hàm số và tiếp điểm" }
     ],
     toFind: {
-      requirementEn: "Tangent line equation y = f'(x₀)(x - x₀) + y₀",
+      requirementEn: "Tangent line equation $y = f'(x_0)(x - x_0) + y_0$",
       requirementVi: "Phương trình tiếp tuyến"
     },
     options: [
-      { label: "A", text: "y = 9x - 14", isCorrect: true },
-      { label: "B", text: "y = 9x + 4", isCorrect: false },
-      { label: "C", text: "y = 3x - 2", isCorrect: false },
-      { label: "D", text: "y = 9x - 22", isCorrect: false },
+      { label: "A", text: "$y = 9x - 14$", isCorrect: true },
+      { label: "B", text: "$y = 9x + 4$", isCorrect: false },
+      { label: "C", text: "$y = 3x - 2$", isCorrect: false },
+      { label: "D", text: "$y = 9x - 22$", isCorrect: false },
     ],
     correctAnswer: "A",
     acceptedAnswerFormats: ["y = 9x - 14", "y=9x-14", "A"],
     solutionSteps: [
-      "Bước 1: Tính đạo hàm: y' = 3x² - 3.",
-      "Bước 2: Hệ số góc tiếp tuyến tại x₀ = 2 là: k = y'(2) = 3(2²) - 3 = 12 - 3 = 9.",
-      "Bước 3: Phương trình tiếp tuyến tại M(2, 4) là: y - 4 = 9(x - 2) ⇔ y = 9x - 18 + 4 ⇔ y = 9x - 14."
+      "Bước 1: Tính đạo hàm: $y' = 3x^2 - 3$.",
+      "Bước 2: Hệ số góc tiếp tuyến tại $x_0 = 2$ là: $k = y'(2) = 3(2^2) - 3 = 12 - 3 = 9$.",
+      "Bước 3: Phương trình tiếp tuyến tại $M(2, 4)$ là: $y - 4 = 9(x - 2) \\iff y = 9x - 18 + 4 \\iff y = 9x - 14$."
     ],
     keyVocabulary: [
       { word: "tangent line", phonetic: "/ˈtæn.dʒənt laɪn/", meaning: "phương trình tiếp tuyến", mathContext: "y = f'(x₀)(x - x₀) + y₀." }

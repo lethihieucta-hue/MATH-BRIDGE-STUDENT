@@ -1373,7 +1373,7 @@ export const MATH_TERMS: MathTerm[] = [
     vietnamese: "Đạo hàm của hàm số (f'(x))",
     category: "calculus",
     gradeLevel: 11,
-    chapterId: "g11_c7",
+    chapterId: "g11_c9",
     topicVi: "Đạo hàm & Tiếp tuyến",
     definitionEn: "The limit of the difference quotient representing the instantaneous rate of change of a function.",
     definitionVi: "Giới hạn của tỉ số số gia hàm số trên số gia đối số khi số gia đối số dần về 0, biểu thị tốc độ biến thiên tức thời.",
@@ -1390,7 +1390,7 @@ export const MATH_TERMS: MathTerm[] = [
     vietnamese: "Phương trình tiếp tuyến của đồ thị",
     category: "calculus",
     gradeLevel: 11,
-    chapterId: "g11_c7",
+    chapterId: "g11_c9",
     topicVi: "Đạo hàm & Tiếp tuyến",
     definitionEn: "The straight line touching a curve at point (x0, y0) with slope equal to derivative f'(x0): y = f'(x0)(x - x0) + y0.",
     definitionVi: "Đường thẳng tiếp xúc với đường cong tại điểm M(x0, y0) có hệ số góc bằng đạo hàm f'(x0): y = f'(x0)(x - x0) + y0.",
@@ -1407,7 +1407,7 @@ export const MATH_TERMS: MathTerm[] = [
     vietnamese: "Quy tắc đạo hàm hàm hợp (Chain Rule)",
     category: "calculus",
     gradeLevel: 11,
-    chapterId: "g11_c7",
+    chapterId: "g11_c9",
     topicVi: "Đạo hàm & Tiếp tuyến",
     definitionEn: "Differentiation rule for composite functions: [f(u(x))]' = f'(u) · u'(x).",
     definitionVi: "Quy tắc tính đạo hàm của hàm hợp: đạo hàm theo biến u nhân với đạo hàm của u theo x.",
@@ -1424,7 +1424,7 @@ export const MATH_TERMS: MathTerm[] = [
     vietnamese: "Đạo hàm cấp hai & Gia tốc tức thời",
     category: "calculus",
     gradeLevel: 11,
-    chapterId: "g11_c7",
+    chapterId: "g11_c9",
     topicVi: "Đạo hàm & Tiếp tuyến",
     definitionEn: "The derivative of the derivative f''(x) = (f'(x))'; in physics represents acceleration a(t) = s''(t).",
     definitionVi: "Đạo hàm của đạo hàm cấp một: f''(x) = (f'(x))'; trong vật lý biểu thị gia tốc tức thời a(t) = s''(t).",
@@ -1435,7 +1435,7 @@ export const MATH_TERMS: MathTerm[] = [
     stageLevel: 2,
   },
 
-  // --- Chương VIII: Quan hệ vuông góc trong không gian (g11_c8) ---
+  // --- Chương VII: Quan hệ vuông góc trong không gian (g11_c7) ---
   {
     id: "term_line_perpendicular_plane",
     term: "line perpendicular to a plane",
@@ -1443,7 +1443,7 @@ export const MATH_TERMS: MathTerm[] = [
     vietnamese: "Đường thẳng vuông góc với mặt phẳng",
     category: "geometry",
     gradeLevel: 11,
-    chapterId: "g11_c8",
+    chapterId: "g11_c7",
     topicVi: "Quan hệ vuông góc (Không gian)",
     definitionEn: "A line perpendicular to every line in a plane, proven by showing it is perpendicular to two intersecting lines in that plane.",
     definitionVi: "Đường thẳng vuông góc với mọi đường thẳng trong mặt phẳng; chứng minh bằng cách chỉ ra nó vuông góc với 2 đường cắt nhau.",
@@ -1460,7 +1460,7 @@ export const MATH_TERMS: MathTerm[] = [
     vietnamese: "Góc phẳng nhị diện (Góc giữa hai mặt phẳng)",
     category: "geometry",
     gradeLevel: 11,
-    chapterId: "g11_c8",
+    chapterId: "g11_c7",
     topicVi: "Quan hệ vuông góc (Không gian)",
     definitionEn: "The plane angle formed by two rays drawn perpendicular to the common intersecting edge in respective planes.",
     definitionVi: "Góc giữa hai nửa đường thẳng cùng vuông góc với giao tuyến tại một điểm trên giao tuyến của hai mặt phẳng.",
@@ -1477,7 +1477,7 @@ export const MATH_TERMS: MathTerm[] = [
     vietnamese: "Khoảng cách từ một điểm đến mặt phẳng",
     category: "geometry",
     gradeLevel: 11,
-    chapterId: "g11_c8",
+    chapterId: "g11_c7",
     topicVi: "Quan hệ vuông góc (Không gian)",
     definitionEn: "The length of the perpendicular line segment dropped from point M to plane (P): d(M, (P)) = MH where H is projection.",
     definitionVi: "Độ dài đoạn thẳng vuông góc kẻ từ điểm M đến hình chiếu vuông góc H trên mặt phẳng (P): d(M, (P)) = MH.",
@@ -1488,7 +1488,7 @@ export const MATH_TERMS: MathTerm[] = [
     stageLevel: 3,
   },
 
-  // --- Chương IX: Các quy tắc tính xác suất (g11_c9) ---
+  // --- Chương VIII: Các quy tắc tính xác suất (g11_c8) ---
   {
     id: "term_addition_rule_probability",
     term: "Addition Rule of Probability",
@@ -1496,7 +1496,7 @@ export const MATH_TERMS: MathTerm[] = [
     vietnamese: "Công thức cộng xác suất",
     category: "probability",
     gradeLevel: 11,
-    chapterId: "g11_c9",
+    chapterId: "g11_c8",
     topicVi: "Quy tắc tính xác suất",
     definitionEn: "General rule: P(A ∪ B) = P(A) + P(B) - P(A ∩ B) for any two events.",
     definitionVi: "Công thức tính xác suất của biến cố hợp: P(A ∪ B) = P(A) + P(B) - P(A ∩ B).",
@@ -1513,7 +1513,7 @@ export const MATH_TERMS: MathTerm[] = [
     vietnamese: "Công thức nhân xác suất cho biến cố độc lập",
     category: "probability",
     gradeLevel: 11,
-    chapterId: "g11_c9",
+    chapterId: "g11_c8",
     topicVi: "Quy tắc tính xác suất",
     definitionEn: "If events A and B are independent, the joint probability is the product: P(A ∩ B) = P(A) · P(B).",
     definitionVi: "Nếu hai biến cố A và B độc lập thì xác suất đồng thời xảy ra bằng tích hai xác suất: P(A ∩ B) = P(A) · P(B).",
