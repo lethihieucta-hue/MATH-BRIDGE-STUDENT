@@ -2376,82 +2376,67 @@ The Metropolis-Hastings algorithm allows exact posterior sampling in multi-thous
   },
   {
     id: "prob_g12_l3_c6_5",
-    title: "Black-Scholes Option Pricing Martingale & Girsanov Theorem Essay",
+    title: "Medical Diagnostic Screening via Bayes' Theorem (SGK KNTT)",
     topic: "Chương VI: Xác suất có điều kiện",
     chapterId: "g12_c6",
     gradeLevel: 12,
     level: 3,
     exam: "SGK Kết nối tri thức",
     stage: 4,
-    difficulty: "Hard",
-    questionEnglish: "Write an academic mathematical finance essay in English deriving the Black-Scholes European Call Option Pricing Formula: C(S, t) = S N(d₁) - K e^{-r(T - t)} N(d₂) using Risk-Neutral Conditional Expectation C = e^{-r(T - t)} E_Q[(S_T - K)⁺ | S_t], change of measure via Girsanov's Theorem, and evaluating the log-normal integral.",
-    questionVietnamese: "Viết bài luận toán tài chính bằng tiếng Anh suy dẫn Công thức Định giá Quyền chọn Mua Black-Scholes: C(S, t) = S N(d₁) - K e^{-r(T - t)} N(d₂) bằng phương pháp Kỳ vọng có điều kiện Trung lập rủi ro C = e^{-r(T - t)} E_Q[(S_T - K)⁺ | S_t], phép đổi độ đo qua Định lý Girsanov, và tính tích phân log-normal.",
+    difficulty: "Medium",
+    questionEnglish: "In a medical screening study based on the Grade 12 national curriculum (SGK Kết nối tri thức), a certain rare disease affects $1\\%$ of the population ($P(D) = 0.01$). A rapid diagnostic test has a sensitivity of $95\\%$ (the probability of testing positive given that the patient has the disease is $P(T^+ | D) = 0.95$) and a specificity of $98\\%$ (the probability of testing negative given that the patient is healthy is $P(T^- | D^c) = 0.98$). Write a step-by-step mathematical essay in English: (1) Formulate and apply the Law of Total Probability to find the probability $P(T^+)$ that a randomly selected person tests positive; (2) Apply Bayes' Theorem to calculate the posterior probability $P(D | T^+)$ that a person who tested positive actually has the disease; (3) Explain the medical intuition behind why $P(D | T^+)$ is only around $32.4\\%$ despite the test having over $95\\%$ accuracy.",
+    questionVietnamese: "Trong một nghiên cứu sàng lọc y tế trích từ SGK Toán 12 Kết nối tri thức, một căn bệnh ảnh hưởng đến $1\\%$ dân số ($P(D) = 0.01$). Một xét nghiệm chẩn đoán nhanh có độ nhạy $95\\%$ (xác suất dương tính khi thực sự có bệnh $P(T^+ | D) = 0.95$) và độ đặc hiệu $98\\%$ (xác suất âm tính khi người đó khỏe mạnh $P(T^- | D^c) = 0.98$). Hãy viết bài tự luận toán học bằng tiếng Anh: (1) Sử dụng Công thức xác suất toàn phần để tính xác suất $P(T^+)$ một người bất kỳ nhận kết quả dương tính; (2) Áp dụng Công thức Bayes để tính xác suất $P(D | T^+)$ một người có kết quả dương tính thực sự mắc bệnh; (3) Giải thích ý nghĩa y khoa tại sao xác suất thực sự mắc bệnh chỉ đạt khoảng $32.4\\%$ dù xét nghiệm có độ chính xác trên $95\\%$.",
     givenParameters: [
-      { label: "Black-Scholes Formula", value: "C = S N(d₁) - K e^{-r τ} N(d₂), d₁,₂ = [ln(S/K) + (r ± σ²/2)τ] / (σ √τ)", meaningVi: "Công thức định giá Black-Scholes" }
+      { label: "Disease Prevalence", value: "$P(D) = 0.01$", meaningVi: "Tỉ lệ mắc bệnh trong cộng đồng (1%)" },
+      { label: "Sensitivity", value: "$P(T^+ | D) = 0.95$", meaningVi: "Độ nhạy của xét nghiệm (95%)" },
+      { label: "Specificity", value: "$P(T^- | D^c) = 0.98$", meaningVi: "Độ đặc hiệu của xét nghiệm (98%)" },
+      { label: "False Positive Rate", value: "$P(T^+ | D^c) = 1 - 0.98 = 0.02$", meaningVi: "Tỉ lệ dương tính giả (2%)" }
     ],
     toFind: {
-      requirementEn: "Risk-neutral expectation proof and log-normal integral evaluation",
-      requirementVi: "Chứng minh kỳ vọng trung lập rủi ro và tích phân chuẩn log-normal"
+      requirementEn: "Total probability $P(T^+)$, posterior probability $P(D | T^+)$, and medical interpretation",
+      requirementVi: "Xác suất toàn phần P(T+), xác suất hậu nghiệm P(D|T+) và giải thích thực tế"
     },
     keyVocabulary: [
-      { word: "conditional probability", phonetic: "/kənˈdɪʃ.ən.əl ˌprɒb.əˈbɪl.ə.ti/", meaning: "kỳ vọng có điều kiện trung lập rủi ro", mathContext: "E_Q[e^{-rT} (S_T - K)⁺ | F_t]." },
-      { word: "independent events", phonetic: "/ˌɪn.dɪˈpen.dənt ɪˈvents/", meaning: "chuyển động Brown hình học (Geometric Brownian Motion)", mathContext: "dS_t = r S_t dt + σ S_t dW_t." }
+      { word: "conditional probability", phonetic: "/kənˈdɪʃ.ən.əl ˌprɒb.əˈbɪl.ə.ti/", meaning: "xác suất có điều kiện P(A|B)", mathContext: "P(A|B) = P(A ∩ B) / P(B)." },
+      { word: "law of total probability", phonetic: "/lɔː əv ˈtəʊ.təl ˌprɒb.əˈbɪl.ə.ti/", meaning: "công thức xác suất toàn phần", mathContext: "P(B) = P(A₁)P(B|A₁) + P(A₂)P(B|A₂)." },
+      { word: "Bayes' theorem", phonetic: "/beɪz ˈθɪə.rəm/", meaning: "công thức Bayes", mathContext: "P(D|T+) = P(D)P(T+|D) / P(T+)." }
     ],
     socraticSteps: [
-      "Under risk-neutral measure Q, S_T = S_t exp((r - 1/2 σ²) τ + σ √τ Z) where Z ~ N(0, 1).",
-      "Option price C = e^{-r τ} E_Q[(S_T - K) 1_{S_T > K}].",
-      "The condition S_T > K is equivalent to Z > -d₂ where d₂ = [ln(S/K) + (r - 1/2 σ²)τ] / (σ √τ).",
-      "Split integral: e^{-r τ} ∫_{-d₂}^∞ S_t e^{(r - 1/2 σ²)τ + σ √τ z} φ(z) dz - e^{-r τ} K ∫_{-d₂}^∞ φ(z) dz.",
-      "Complete square in first integral to obtain S_t N(d₁) and second gives K e^{-r τ} N(d₂)."
+      "Identify the complementary event: $P(D^c) = 1 - 0.01 = 0.99$.",
+      "Compute false positive probability: $P(T^+ | D^c) = 1 - P(T^- | D^c) = 1 - 0.98 = 0.02$.",
+      "Apply Law of Total Probability: $P(T^+) = P(D) P(T^+ | D) + P(D^c) P(T^+ | D^c) = 0.01 \\times 0.95 + 0.99 \\times 0.02 = 0.0095 + 0.0198 = 0.0293$.",
+      "Apply Bayes' Formula: $P(D | T^+) = \\frac{P(D) P(T^+ | D)}{P(T^+)} = \\frac{0.0095}{0.0293} \\approx 0.3242$ ($32.42\\%$).",
+      "Explain the base rate fallacy: Healthy people vastly outnumber sick people ($99\\%$ vs $1\\%$), so false positives outnumber true positives."
     ],
-    commonPitfall: "Nhầm lẫn giữa d₁ và d₂ (d₁ = d₂ + σ √τ).",
-    exemplaryEssay: `Quantitative Finance & Stochastic Calculus Report: Derivation of the Black-Scholes European Option Pricing Formula via Risk-Neutral Conditional Expectation
+    commonPitfall: "Nhầm lẫn giữa P(T+ | D) (độ nhạy 95%) và P(D | T+) (xác suất thực sự có bệnh khi dương tính, chỉ khoảng 32.4%).",
+    exemplaryEssay: `Medical Diagnostic Screening and Bayesian Inference Report
 
-1. Geometric Brownian Motion Under the Risk-Neutral Measure ℚ
-Let S_t denote the stock price at time t.
-By Girsanov's Theorem and the Fundamental Theorem of Asset Pricing, under the unique equivalent risk-neutral martingale measure ℚ:
-dS_t = r S_t dt + \\sigma S_t dW_t^\\mathbb{Q},
-where r is the constant risk-free interest rate, σ is the stock volatility, and W_t^ℚ is a standard Brownian motion.
+1. Problem Formulation and Probabilistic Definitions
+Let D denote the event that a randomly chosen individual has the disease, and D^c denote the event that the individual is healthy.
+Let T^+ denote a positive test result, and T^- denote a negative test result.
+From the epidemiological data:
+- Prior Probability (Base Rate): $P(D) = 0.01 \\implies P(D^c) = 1 - 0.01 = 0.99$.
+- Sensitivity: $P(T^+ \\mid D) = 0.95$.
+- Specificity: $P(T^- \\mid D^c) = 0.98 \\implies$ False Positive Rate $P(T^+ \\mid D^c) = 1 - 0.98 = 0.02$.
 
-By Itô's Lemma, the terminal stock price at maturity T (time to maturity \\tau = T - t) is:
-S_T = S_t \\exp\\left( \\left(r - \\frac{1}{2}\\sigma^2\\right)\\tau + \\sigma \\sqrt{\\tau} Z \\right), \\quad Z \\sim \\mathcal{N}(0, 1).
+2. Calculation of Overall Positive Test Probability via Law of Total Probability
+Since $\{D, D^c\}$ forms a complete partition of the sample space:
+$$P(T^+) = P(D) \\cdot P(T^+ \\mid D) + P(D^c) \\cdot P(T^+ \\mid D^c)$$
+Substituting the numerical values:
+$$P(T^+) = (0.01)(0.95) + (0.99)(0.02) = 0.0095 + 0.0198 = 0.0293$$
+Thus, approximately $2.93\\%$ of the entire population will receive a positive test result.
 
-2. Risk-Neutral Pricing as a Conditional Expectation
-The fair value C(S_t, t) of a European call option with strike price K is the discounted conditional expectation of its terminal payoff:
-C(S_t, t) = e^{-r\\tau} \\mathbb{E}_\\mathbb{Q} \\left[ (S_T - K)^+ \\mid \\mathcal{F}_t \\right] = e^{-r\\tau} \\int_{-\\infty}^{+\\infty} \\max(0, \\; S_T(z) - K) \\frac{1}{\\sqrt{2\\pi}} e^{-z^2/2} dz.
+3. Calculation of Posterior Probability via Bayes' Theorem
+We now compute the probability that a person who tested positive actually carries the disease, $P(D \\mid T^+)$:
+$$P(D \\mid T^+) = \\frac{P(D) \\cdot P(T^+ \\mid D)}{P(T^+)} = \\frac{0.0095}{0.0293} \\approx 0.3242 \\quad (32.42\\%).$$
 
-3. Determination of the In-the-Money Integration Bound
-The option finishes in-the-money (S_T > K) if and only if:
-S_t \\exp\\left( \\left(r - \\frac{1}{2}\\sigma^2\\right)\\tau + \\sigma \\sqrt{\\tau} Z \\right) > K
-\\iff \\left(r - \\frac{1}{2}\\sigma^2\\right)\\tau + \\sigma \\sqrt{\\tau} Z > \\ln\\left(\\frac{K}{S_t}\\right)
-\\iff Z > \\frac{\\ln(K / S_t) - (r - \\sigma^2/2)\\tau}{\\sigma \\sqrt{\\tau}} = -d_2,
-where:
-d_2 = \\frac{\\ln(S_t / K) + (r - \\sigma^2/2)\\tau}{\\sigma \\sqrt{\\tau}}.
-
-4. Splitting and Evaluating the Two Integrals
-C = e^{-r\\tau} \\int_{-d_2}^\\infty S_T(z) \\phi(z) dz - K e^{-r\\tau} \\int_{-d_2}^\\infty \\phi(z) dz = I_1 - I_2.
-
-- Evaluation of Term 2 (I₂):
-  I_2 = K e^{-r\\tau} P(Z > -d_2) = K e^{-r\\tau} P(Z < d_2) = K e^{-r\\tau} N(d_2),
-  where N(·) is the standard normal cumulative distribution function.
-
-- Evaluation of Term 1 (I₁):
-  I_1 = e^{-r\\tau} \\int_{-d_2}^\\infty S_t e^{(r - \\sigma^2/2)\\tau + \\sigma\\sqrt{\\tau} z} \\frac{1}{\\sqrt{2\\pi}} e^{-z^2/2} dz
-  = S_t e^{-\\sigma^2\\tau/2} \\int_{-d_2}^\\infty \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2}(z^2 - 2\\sigma\\sqrt{\\tau} z)} dz.
-
-Completing the square in the exponent z² - 2σ√τ z = (z - σ√τ)² - σ² τ:
-I_1 = S_t \\int_{-d_2}^\\infty \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2}(z - \\sigma\\sqrt{\\tau})^2} dz.
-
-Letting u = z - σ√τ (du = dz), lower bound becomes -d₂ - σ√τ = -d₁ where:
-d_1 = d_2 + \\sigma\\sqrt{\\tau} = \\frac{\\ln(S_t / K) + (r + \\sigma^2/2)\\tau}{\\sigma \\sqrt{\\tau}}.
-
-Thus:
-I_1 = S_t \\int_{-d_1}^\\infty \\phi(u) du = S_t N(d_1).
-
-5. The Black-Scholes-Merton Pricing Formula (1973 Nobel Prize)
-C(S, t) = S N(d_1) - K e^{-r(T - t)} N(d_2).
-
-Conclusion:
-The Black-Scholes formula establishes that derivative value depends strictly on volatility and risk-free hedging rather than subjective expected asset appreciation rates. ■`,
+4. Medical and Statistical Interpretation (The Base Rate Fallacy)
+Although the diagnostic test is highly accurate ($95\\%$ sensitivity and $98\\%$ specificity), a patient receiving a positive result has only approximately a $32.4\\%$ chance of truly being sick.
+The reason lies in the rarity of the disease:
+- In a sample of 10,000 individuals, 100 have the disease, producing $100 \\times 0.95 = 95$ true positives.
+- 9,900 individuals are healthy, producing $9,900 \\times 0.02 = 198$ false positives.
+- The total positive cohort contains $95 + 198 = 293$ people, of whom only 95 are genuinely sick:
+  $$\\frac{95}{293} \\approx 32.4\\%.$$
+Therefore, clinical screening protocols mandate a secondary confirmatory test before rendering a definitive medical diagnosis. ■`,
   },
 ];

@@ -599,46 +599,62 @@ Since the logical equivalence holds for all x, the set identity A ∩ (B ∪ C) 
   },
   {
     id: "prob_g10_l3_c1_5",
-    title: "Infinite Set Cardinality and Real Intervals Essay",
+    title: "Proof by Contradiction: Irrationality of √2 (SGK KNTT)",
     topic: "Chương I: Mệnh đề và tập hợp",
     chapterId: "g10_c1",
     gradeLevel: 10,
     level: 3,
     exam: "SGK Kết nối tri thức",
     stage: 4,
-    difficulty: "Hard",
-    questionEnglish: "Write an academic set-theory report in English exploring infinite sets: prove that any open interval (a, b) on the real number line contains infinitely many rational and irrational numbers (the Density Theorem).",
-    questionVietnamese: "Viết báo cáo toán học bằng tiếng Anh về tập hợp vô hạn: chứng minh mọi khoảng mở (a, b) trên trục số thực đều chứa vô số số hữu tỉ và vô tỉ (Định lý trù mật).",
+    difficulty: "Medium",
+    questionEnglish: "Write a complete academic mathematical essay in English proving by contradiction (reductio ad absurdum) that $\\sqrt{2}$ is an irrational number, as presented in the Vietnamese National High School curriculum (SGK Kết nối tri thức). Structure your essay with: (1) Setting up the negation assumption; (2) Algebraic transformation and parity deduction; (3) Reaching the logical contradiction; (4) Formal conclusion.",
+    questionVietnamese: "Viết bài luận toán học hoàn chỉnh bằng tiếng Anh chứng minh bằng phương pháp phản chứng rằng $\\sqrt{2}$ là số vô tỉ, bám sát sách giáo khoa Toán 10 Kết nối tri thức. Bố cục bài viết gồm: (1) Giả thiết phản chứng; (2) Biến đổi đại số và lập luận tính chẵn lẻ; (3) Dẫn đến mâu thuẫn logic; (4) Kết luận chính thức.",
     givenParameters: [
-      { label: "Interval", value: "(a, b) ⊂ ℝ with a < b", meaningVi: "Khoảng mở thực bất kỳ" }
+      { label: "Target Statement", value: "$\\sqrt{2} \\notin \\mathbb{Q}$", meaningVi: "Chứng minh √2 là số vô tỉ" }
     ],
     toFind: {
-      requirementEn: "Proof of Density of Rational & Irrational Numbers",
-      requirementVi: "Chứng minh tính trù mật của ℚ và ℝ \\ ℚ"
+      requirementEn: "Rigorous proof by contradiction in English",
+      requirementVi: "Chứng minh phản chứng chặt chẽ bằng tiếng Anh"
     },
     keyVocabulary: [
-      { word: "universal set", phonetic: "/ˌjuː.nɪˈvɜː.səl set/", meaning: "tập số thực ℝ", mathContext: "Tính trù mật của số thực." }
+      { word: "proof by contradiction", phonetic: "/pruːf baɪ ˌkɒn.trəˈdɪk.ʃən/", meaning: "phương pháp phản chứng", mathContext: "Giả sử ngược lại và dẫn tới mâu thuẫn." },
+      { word: "coprime", phonetic: "/kəʊˈpraɪm/", meaning: "nguyên tố cùng nhau (ước chung lớn nhất là 1)", mathContext: "gcd(a, b) = 1." },
+      { word: "rational number", phonetic: "/ˈræʃ.ən.əl ˈnʌm.bər/", meaning: "số hữu tỉ (a/b)", mathContext: "Tập hợp ℚ." }
     ],
     socraticSteps: [
-      "Use Archimedean property to find integer q with 1/q < b - a.",
-      "Find integer p such that a < p/q < b."
+      "Assume the contrary: $\\sqrt{2} \\in \\mathbb{Q}$, so $\\sqrt{2} = \\frac{a}{b}$ where $a, b \\in \\mathbb{Z}^+$ and $\\gcd(a, b) = 1$.",
+      "Square both sides: $2 = \\frac{a^2}{b^2} \\Rightarrow a^2 = 2b^2$, meaning $a^2$ is even, so $a$ must be even ($a = 2k$).",
+      "Substitute $a = 2k$: $(2k)^2 = 4k^2 = 2b^2 \\Rightarrow b^2 = 2k^2$, meaning $b^2$ is even, so $b$ must be even.",
+      "Conclude: Both $a$ and $b$ are even, contradicting $\\gcd(a, b) = 1$."
     ],
-    commonPitfall: "Nhầm lẫn giữa tập đếm được và tập không đếm được.",
-    exemplaryEssay: `Mathematical Report: The Density of Rational and Irrational Numbers in Real Intervals
+    commonPitfall: "Quên nêu điều kiện phân số a/b tối giản (a và b nguyên tố cùng nhau) ngay từ bước đầu.",
+    exemplaryEssay: `Mathematical Proof by Contradiction: The Irrationality of √2
 
-1. The Density of Rational Numbers ℚ
-Let a, b ∈ ℝ with a < b. By the Archimedean Property, there exists n ∈ ℕ such that n > 1 / (b - a), which means 1/n < b - a.
-Let m be the smallest integer strictly greater than na, so m - 1 ≤ na < m.
-Then na < m ≤ na + 1 < na + n(b - a) = nb.
-Dividing by n gives a < m/n < b.
-Since m/n ∈ ℚ, there exists a rational number r ∈ (a, b). Repeating this yields infinitely many rationals.
+1. Indirect Assumption
+Assume for the sake of contradiction that $\\sqrt{2}$ is a rational number:
+$\\sqrt{2} \\in \\mathbb{Q}$.
+By definition of rational numbers, $\\sqrt{2}$ can be written as an irreducible fraction of two positive integers:
+$\\sqrt{2} = \\frac{a}{b}$, where $a, b \\in \\mathbb{Z}^+$ and $\\gcd(a, b) = 1$ (the fraction is in lowest terms).
 
-2. The Density of Irrational Numbers ℝ \\ ℚ
-Applying the same theorem to interval (a - √2, b - √2) gives a rational r_0.
-Then r_0 + √2 is an irrational number belonging strictly to (a, b).
+2. Algebraic Transformation & Parity of a
+Squaring both sides of the equation:
+$2 = \\frac{a^2}{b^2} \\iff a^2 = 2b^2$.
+Since $2b^2$ is divisible by 2, $a^2$ must be an even integer.
+A fundamental lemma of number theory states that if the square of an integer is even, the integer itself must be even.
+Thus, $a$ is even, and there exists an integer $k \\in \\mathbb{Z}^+$ such that:
+$a = 2k$.
 
-Conclusion:
-Every interval (a, b) on the real line is infinitely dense in both rational and irrational numbers. ■`,
+3. Parity of b and the Contradiction
+Substituting $a = 2k$ back into the equation $a^2 = 2b^2$:
+$(2k)^2 = 2b^2 \\iff 4k^2 = 2b^2 \\iff b^2 = 2k^2$.
+By identical reasoning, since $b^2$ is a multiple of 2, $b^2$ is even, which implies that $b$ must also be an even integer.
+
+4. Conclusion
+We have established that both $a$ and $b$ are even integers, meaning that both share a common factor of 2.
+This directly contradicts our initial assumption that $\\gcd(a, b) = 1$ (that the fraction $\\frac{a}{b}$ is irreducible).
+Therefore, the initial assumption must be false.
+We conclude that $\\sqrt{2}$ cannot be expressed as a ratio of integers and is therefore an irrational number:
+$\\sqrt{2} \\notin \\mathbb{Q}$. ■`,
   },
 
   // =========================================================================

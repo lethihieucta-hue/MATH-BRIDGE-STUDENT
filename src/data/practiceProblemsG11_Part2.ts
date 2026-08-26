@@ -750,37 +750,37 @@ Euler's formula V - E + F = 2 is a fundamental topological invariant of all sphe
     exam: "SGK Kết nối tri thức",
     stage: 2,
     difficulty: "Easy",
-    questionEnglish: "Evaluate the limit: lim_{x→2} (x² - 5x + 6) / (x² - 4).",
-    questionVietnamese: "Tính giới hạn hàm số dạng vô định 0/0: lim_{x→2} (x² - 5x + 6) / (x² - 4).",
+    questionEnglish: "Evaluate the limit: $\\lim_{x \\to 2} \\frac{x^2 - 5x + 6}{x^2 - 4}$.",
+    questionVietnamese: "Tính giới hạn hàm số dạng vô định 0/0: $\\lim_{x \\to 2} \\frac{x^2 - 5x + 6}{x^2 - 4}$.",
     givenParameters: [
-      { label: "Limit", value: "lim_{x→2} (x² - 5x + 6) / (x² - 4)", meaningVi: "Giới hạn tại điểm x = 2" }
+      { label: "Limit", value: "$\\lim_{x \\to 2} \\frac{x^2 - 5x + 6}{x^2 - 4}$", meaningVi: "Giới hạn tại điểm x = 2" }
     ],
     toFind: {
-      requirementEn: "Exact limit value L",
-      requirementVi: "Giá trị giới hạn L"
+      requirementEn: "Exact limit value $L$",
+      requirementVi: "Giá trị giới hạn $L$"
     },
     options: [
-      { label: "A", text: "L = -1 / 4", isCorrect: true },
-      { label: "B", text: "L = 1 / 4", isCorrect: false },
-      { label: "C", text: "L = 0", isCorrect: false },
-      { label: "D", text: "L = -1 / 2", isCorrect: false },
+      { label: "A", text: "$L = -\\frac{1}{4}$", isCorrect: true },
+      { label: "B", text: "$L = \\frac{1}{4}$", isCorrect: false },
+      { label: "C", text: "$L = 0$", isCorrect: false },
+      { label: "D", text: "$L = -\\frac{1}{2}$", isCorrect: false },
     ],
     correctAnswer: "A",
     acceptedAnswerFormats: ["-1/4", "-0.25", "A"],
     solutionSteps: [
-      "Bước 1: Thay x = 2 thấy cả tử và mẫu đều bằng 0 (dạng vô định 0/0).",
-      "Bước 2: Phân tích nhân tử: tử số = (x - 2)(x - 3); mẫu số = (x - 2)(x + 2).",
-      "Bước 3: Triệt tiêu nhân tử chung (x - 2) với x ≠ 2: lim_{x→2} (x - 3) / (x + 2).",
-      "Bước 4: Thay x = 2: L = (2 - 3) / (2 + 2) = -1 / 4."
+      "Bước 1: Thay $x = 2$ thấy cả tử và mẫu đều bằng $0$ (dạng vô định $\\frac{0}{0}$).",
+      "Bước 2: Phân tích nhân tử: tử số = $(x - 2)(x - 3)$; mẫu số = $(x - 2)(x + 2)$.",
+      "Bước 3: Triệt tiêu nhân tử chung $(x - 2)$ với $x \\neq 2$: $\\lim_{x \\to 2} \\frac{x - 3}{x + 2}$.",
+      "Bước 4: Thay $x = 2$: $L = \\frac{2 - 3}{2 + 2} = -\\frac{1}{4}$."
     ],
     keyVocabulary: [
       { word: "limit", phonetic: "/ˈlɪm.ɪt/", meaning: "giới hạn hàm số", mathContext: "Khử dạng vô định 0/0 bằng phân tích nhân tử." },
       { word: "indeterminate form", phonetic: "/ˌɪn.dɪˈtɜː.mɪ.nət fɔːm/", meaning: "dạng vô định (0/0)", mathContext: "Cần biến đổi rút gọn trước khi tính." }
     ],
     socraticSteps: [
-      "Phân tích tử thành (x - 2)(x - 3).",
-      "Phân tích mẫu thành (x - 2)(x + 2).",
-      "Rút gọn (x - 2) rồi thay x = 2 được -1/4."
+      "Phân tích tử thành $(x - 2)(x - 3)$.",
+      "Phân tích mẫu thành $(x - 2)(x + 2)$.",
+      "Rút gọn $(x - 2)$ rồi thay $x = 2$ được $-\\frac{1}{4}$."
     ],
     commonPitfall: "Thay trực tiếp x = 2 vào mẫu số thấy bằng 0 rồi kết luận giới hạn bằng vô cùng.",
     visualType: "function",
@@ -795,36 +795,36 @@ Euler's formula V - E + F = 2 is a fundamental topological invariant of all sphe
     exam: "SGK Kết nối tri thức",
     stage: 2,
     difficulty: "Medium",
-    questionEnglish: "Evaluate the limit: lim_{x→0} (√(1 + 3x) - 1) / x.",
-    questionVietnamese: "Tính giới hạn chứa căn thức: lim_{x→0} (√(1 + 3x) - 1) / x.",
+    questionEnglish: "Evaluate the limit: $\\lim_{x \\to 0} \\frac{\\sqrt{1 + 3x} - 1}{x}$.",
+    questionVietnamese: "Tính giới hạn chứa căn thức: $\\lim_{x \\to 0} \\frac{\\sqrt{1 + 3x} - 1}{x}$.",
     givenParameters: [
-      { label: "Limit", value: "lim_{x→0} (√(1 + 3x) - 1) / x", meaningVi: "Dạng vô định 0/0 có căn" }
+      { label: "Limit", value: "$\\lim_{x \\to 0} \\frac{\\sqrt{1 + 3x} - 1}{x}$", meaningVi: "Dạng vô định 0/0 có căn" }
     ],
     toFind: {
-      requirementEn: "Exact limit value L",
-      requirementVi: "Giá trị giới hạn L"
+      requirementEn: "Exact limit value $L$",
+      requirementVi: "Giá trị giới hạn $L$"
     },
     options: [
-      { label: "A", text: "L = 3 / 2 = 1.5", isCorrect: true },
-      { label: "B", text: "L = 3", isCorrect: false },
-      { label: "C", text: "L = 1", isCorrect: false },
-      { label: "D", text: "L = 2 / 3", isCorrect: false },
+      { label: "A", text: "$L = \\frac{3}{2} = 1.5$", isCorrect: true },
+      { label: "B", text: "$L = 3$", isCorrect: false },
+      { label: "C", text: "$L = 1$", isCorrect: false },
+      { label: "D", text: "$L = \\frac{2}{3}$", isCorrect: false },
     ],
     correctAnswer: "A",
     acceptedAnswerFormats: ["3/2", "1.5", "A"],
     solutionSteps: [
-      "Bước 1: Nhân liên hợp cả tử và mẫu với (√(1 + 3x) + 1):",
-      "[(√(1 + 3x) - 1)(√(1 + 3x) + 1)] / [x (√(1 + 3x) + 1)] = (1 + 3x - 1) / [x (√(1 + 3x) + 1)] = 3x / [x (√(1 + 3x) + 1)].",
-      "Bước 2: Triệt tiêu x: lim_{x→0} 3 / (√(1 + 3x) + 1).",
-      "Bước 3: Thay x = 0: L = 3 / (√1 + 1) = 3 / 2."
+      "Bước 1: Nhân liên hợp cả tử và mẫu với $(\\sqrt{1 + 3x} + 1)$:",
+      "$$\\frac{(\\sqrt{1 + 3x} - 1)(\\sqrt{1 + 3x} + 1)}{x(\\sqrt{1 + 3x} + 1)} = \\frac{3x}{x(\\sqrt{1 + 3x} + 1)}$$",
+      "Bước 2: Triệt tiêu $x$: $\\lim_{x \\to 0} \\frac{3}{\\sqrt{1 + 3x} + 1}$.",
+      "Bước 3: Thay $x = 0$: $L = \\frac{3}{\\sqrt{1} + 1} = \\frac{3}{2}$."
     ],
     keyVocabulary: [
       { word: "limit", phonetic: "/ˈlɪm.ɪt/", meaning: "nhân lượng liên hợp khử căn", mathContext: "(√a - b)(√a + b) = a - b²." }
     ],
     socraticSteps: [
-      "Nhân liên hợp trên tử được 3x.",
-      "Rút gọn x ở tử và mẫu.",
-      "Thay x = 0 vào mẫu số: √1 + 1 = 2 => L = 3/2."
+      "Nhân liên hợp trên tử được $3x$.",
+      "Rút gọn $x$ ở tử và mẫu.",
+      "Thay $x = 0$ vào mẫu số: $\\sqrt{1} + 1 = 2 \\Rightarrow L = \\frac{3}{2}$."
     ],
     commonPitfall: "Quên nhân lượng liên hợp vào mẫu số.",
     visualType: "function",
@@ -839,34 +839,34 @@ Euler's formula V - E + F = 2 is a fundamental topological invariant of all sphe
     exam: "SGK Kết nối tri thức",
     stage: 2,
     difficulty: "Easy",
-    questionEnglish: "Calculate the sequence limit: lim_{n→∞} (4n³ - 2n + 1) / (3n³ + 5n² - 7).",
-    questionVietnamese: "Tính giới hạn của dãy số: lim_{n→∞} (4n³ - 2n + 1) / (3n³ + 5n² - 7).",
+    questionEnglish: "Calculate the sequence limit: $\\lim_{n \\to \\infty} \\frac{4n^3 - 2n + 1}{3n^3 + 5n^2 - 7}$.",
+    questionVietnamese: "Tính giới hạn của dãy số: $\\lim_{n \\to \\infty} \\frac{4n^3 - 2n + 1}{3n^3 + 5n^2 - 7}$.",
     givenParameters: [
-      { label: "Limit", value: "lim_{n→∞} (4n³ - 2n + 1) / (3n³ + 5n² - 7)", meaningVi: "Bậc tử = Bậc mẫu = 3" }
+      { label: "Limit", value: "$\\lim_{n \\to \\infty} \\frac{4n^3 - 2n + 1}{3n^3 + 5n^2 - 7}$", meaningVi: "Bậc tử = Bậc mẫu = 3" }
     ],
     toFind: {
-      requirementEn: "Limit value L",
-      requirementVi: "Giá trị giới hạn"
+      requirementEn: "Limit value $L$",
+      requirementVi: "Giá trị giới hạn $L$"
     },
     options: [
-      { label: "A", text: "L = 4 / 3", isCorrect: true },
-      { label: "B", text: "L = 0", isCorrect: false },
-      { label: "C", text: "L = +∞", isCorrect: false },
-      { label: "D", text: "L = -1 / 7", isCorrect: false },
+      { label: "A", text: "$L = \\frac{4}{3}$", isCorrect: true },
+      { label: "B", text: "$L = 0$", isCorrect: false },
+      { label: "C", text: "$L = +\\infty$", isCorrect: false },
+      { label: "D", text: "$L = -\\frac{1}{7}$", isCorrect: false },
     ],
     correctAnswer: "A",
     acceptedAnswerFormats: ["4/3", "A"],
     solutionSteps: [
-      "Bước 1: Chia cả tử và mẫu cho lũy thừa bậc cao nhất n³:",
-      "lim_{n→∞} (4 - 2/n² + 1/n³) / (3 + 5/n - 7/n³).",
-      "Bước 2: Vì lim (1/n^k) = 0 với k > 0, ta có L = (4 - 0 + 0) / (3 + 0 - 0) = 4 / 3."
+      "Bước 1: Chia cả tử và mẫu cho lũy thừa bậc cao nhất $n^3$:",
+      "$$\\lim_{n \\to \\infty} \\frac{4 - \\frac{2}{n^2} + \\frac{1}{n^3}}{3 + \\frac{5}{n} - \\frac{7}{n^3}}$$",
+      "Bước 2: Vì $\\lim \\frac{1}{n^k} = 0$ với mọi $k > 0$, ta có $L = \\frac{4 - 0 + 0}{3 + 0 - 0} = \\frac{4}{3}$."
     ],
     keyVocabulary: [
       { word: "limit", phonetic: "/ˈlɪm.ɪt/", meaning: "giới hạn tại vô cực", mathContext: "Tỉ số hệ số của lũy thừa bậc cao nhất." }
     ],
     socraticSteps: [
-      "Bậc cao nhất ở cả tử và mẫu là n³.",
-      "Lấy hệ số của n³ ở tử (4) chia cho mẫu (3) được 4/3."
+      "Bậc cao nhất ở cả tử và mẫu là $n^3$.",
+      "Lấy hệ số của $n^3$ ở tử (4) chia cho mẫu (3) được $\\frac{4}{3}$."
     ],
     commonPitfall: "Chia cho n thay vì chia cho n³.",
     visualType: "function",

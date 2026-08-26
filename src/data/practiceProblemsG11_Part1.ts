@@ -667,59 +667,72 @@ The trigonometric circle invariance on the normalized phase plane represents the
   },
   {
     id: "prob_g11_l3_c1_5",
-    title: "Trigonometric Form of Complex Numbers and De Moivre's Theorem",
+    title: "Modeling Ferris Wheel Height via Trigonometric Function (SGK KNTT)",
     topic: "Chương I: Hàm số lượng giác và phương trình lượng giác",
     chapterId: "g11_c1",
     gradeLevel: 11,
     level: 3,
     exam: "SGK Kết nối tri thức",
     stage: 4,
-    difficulty: "Hard",
-    questionEnglish: "Write an academic mathematics essay in English proving De Moivre's Theorem: [r(cos θ + i sin θ)]^n = r^n (cos(nθ) + i sin(nθ)) for all integers n ∈ ℤ using mathematical induction and trigonometric angle sum formulas. Conclude with the extraction of the n-th roots of unity.",
-    questionVietnamese: "Viết bài luận toán học bằng tiếng Anh chứng minh Định lý De Moivre: [r(cos θ + i sin θ)]^n = r^n (cos(nθ) + i sin(nθ)) với mọi số nguyên n ∈ ℤ bằng quy nạp toán học và công thức cộng góc. Kết luận bằng cách xác định các căn bậc n của đơn vị.",
+    difficulty: "Medium",
+    questionEnglish: "A giant Ferris wheel has a radius of $R = 20\\text{ m}$, rotates counterclockwise at a constant speed, and completes one full revolution every $60\\text{ seconds}$. The bottom of the wheel is located $5\\text{ m}$ above the ground. A passenger boards a cabin at the lowest position at time $t = 0$. Write a complete mathematical essay in English: (1) Formulate the height function $h(t)$ of the cabin above the ground for $t \\in [0, 60]$; (2) Solve the trigonometric equation to determine all time intervals during which the cabin is at least $35\\text{ m}$ above the ground.",
+    questionVietnamese: "Một vòng quay Mặt Trời có bán kính $R = 20\\text{ m}$, quay ngược chiều kim đồng hồ với tốc độ đều và hoàn thành một vòng quay sau $60\\text{ giây}$. Điểm thấp nhất của vòng quay cách mặt đất $5\\text{ m}$. Một hành khách lên cabin tại vị trí thấp nhất lúc $t = 0$. Hãy viết bài tự luận toán học bằng tiếng Anh: (1) Thiết lập hàm số độ cao $h(t)$ của cabin so với mặt đất trong một chu kỳ $t \\in [0, 60]$; (2) Giải phương trình lượng giác để tìm tất cả các khoảng thời gian mà cabin đạt độ cao từ $35\\text{ m}$ trở lên so với mặt đất.",
     givenParameters: [
-      { label: "De Moivre Formula", value: "(cos θ + i sin θ)ⁿ = cos(nθ) + i sin(nθ)", meaningVi: "Công thức De Moivre" }
+      { label: "Wheel Radius", value: "$R = 20\\text{ m}$", meaningVi: "Bán kính vòng quay Mặt Trời" },
+      { label: "Axle Height", value: "$H = 5 + 20 = 25\\text{ m}$", meaningVi: "Độ cao trục quay so với mặt đất" },
+      { label: "Period", value: "$T = 60\\text{ s}$", meaningVi: "Chu kỳ một vòng quay" },
+      { label: "Target Height", value: "$h(t) \\ge 35\\text{ m}$", meaningVi: "Độ cao yêu cầu đạt được" }
     ],
     toFind: {
-      requirementEn: "Inductive proof for positive/negative n and n-th roots of unity",
-      requirementVi: "Chứng minh quy nạp và công thức căn đơn vị"
+      requirementEn: "Height function $h(t)$ and time interval when $h(t) \\ge 35\\text{ m}$",
+      requirementVi: "Hàm số độ cao $h(t)$ và khoảng thời gian thỏa mãn $h(t) \\ge 35\\text{ m}$"
     },
     keyVocabulary: [
-      { word: "Euler's formula", phonetic: "/ˈɔɪ.lər ˈfɔː.mjə.lə/", meaning: "định lý De Moivre", mathContext: "Khảo sát lũy thừa và căn số phức." }
+      { word: "amplitude", phonetic: "/ˈæm.plɪ.tʃuːd/", meaning: "biên độ dao động", mathContext: "Bán kính vòng quay R = 20 m." },
+      { word: "period", phonetic: "/ˈpɪə.ri.əd/", meaning: "chu kỳ tuần hoàn", mathContext: "T = 60 s, tần số góc ω = 2π / T = π / 30 rad/s." },
+      { word: "vertical shift", phonetic: "/ˈvɜː.tɪ.kəl ʃɪft/", meaning: "độ dịch chuyển đứng (trục đối xứng)", mathContext: "Độ cao tâm vòng quay: 25 m." }
     ],
     socraticSteps: [
-      "Base step n = 1.",
-      "Inductive step: multiply by (cos θ + i sin θ) and apply addition theorems.",
-      "Extend to negative integers using z^{-n} = 1 / z^n.",
-      "Solve z^n = 1 => z_k = cos(2kπ/n) + i sin(2kπ/n)."
+      "Find the angular frequency: $\\omega = \\frac{2\\pi}{T} = \\frac{2\\pi}{60} = \\frac{\\pi}{30}\\text{ rad/s}$.",
+      "At $t = 0$, the cabin is at the minimum height $h(0) = 5\\text{ m}$, so $h(t) = 25 - 20\\cos\\left(\\frac{\\pi t}{30}\\right)$.",
+      "Set $h(t) \\ge 35 \\iff 25 - 20\\cos\\left(\\frac{\\pi t}{30}\\right) \\ge 35 \\iff \\cos\\left(\\frac{\\pi t}{30}\\right) \\le -\\frac{1}{2}$.",
+      "Recall $\\cos\\theta \\le -\\frac{1}{2} \\iff \\frac{2\\pi}{3} \\le \\theta \\le \\frac{4\\pi}{3}$.",
+      "Solve for $t$: $20 \\le t \\le 40\\text{ seconds}$."
     ],
-    commonPitfall: "Bỏ quên bước mở rộng chứng minh cho số nguyên âm n < 0.",
-    exemplaryEssay: `Proof of De Moivre's Theorem and the Extraction of the n-th Roots of Unity
+    commonPitfall: "Quên trừ dấu trong $-\\cos$ khi cabin bắt đầu từ điểm thấp nhất thay vì điểm cân bằng.",
+    exemplaryEssay: `Mathematical Modeling of Ferris Wheel Cabin Height Using Trigonometric Functions
 
-1. Statement of De Moivre's Theorem
-For any complex number z = r(\\cos\\theta + i\\sin\\theta) and any integer n \\in \\mathbb{Z}:
-z^n = [r(\\cos\\theta + i\\sin\\theta)]^n = r^n (\\cos(n\\theta) + i\\sin(n\\theta)).
+1. Formulating the Height Function h(t)
+Let the ground be represented by the horizontal reference level h = 0.
+- The radius of the Ferris wheel is R = 20 m.
+- Since the lowest cabin position is 5 m above the ground, the central axis of the wheel is situated at:
+  H_center = 5 + 20 = 25 m.
+- The wheel rotates uniformly with a period of T = 60 seconds. Thus, the angular frequency is:
+  \\omega = \\frac{2\\pi}{T} = \\frac{2\\pi}{60} = \\frac{\\pi}{30} \\text{ rad/s}.
 
-2. Inductive Proof for Positive Integers n ∈ ℕ
-- Base Case (n = 1): (\\cos\\theta + i\\sin\\theta)^1 = \\cos(1\\theta) + i\\sin(1\\theta), holds trivially.
-- Inductive Hypothesis: Assume (\\cos\\theta + i\\sin\\theta)^k = \\cos(k\\theta) + i\\sin(k\\theta) for k ≥ 1.
-- Inductive Step (n = k + 1):
-  (\\cos\\theta + i\\sin\\theta)^{k+1} = (\\cos\\theta + i\\sin\\theta)^k \\cdot (\\cos\\theta + i\\sin\\theta)
-  = [\\cos(k\\theta) + i\\sin(k\\theta)] [\\cos\\theta + i\\sin\\theta]
-  = [\\cos(k\\theta)\\cos\\theta - \\sin(k\\theta)\\sin\\theta] + i [\\sin(k\\theta)\\cos\\theta + \\cos(k\\theta)\\sin\\theta].
+At time t = 0, the cabin starts at its minimum elevation h(0) = 5 m. Therefore, the vertical displacement follows an inverted cosine function:
+h(t) = 25 - 20\\cos\\left(\\frac{\\pi t}{30}\\right) \\quad \\text{for } 0 \\le t \\le 60.
 
-Applying the angle addition theorems:
-= \\cos(k\\theta + \\theta) + i\\sin(k\\theta + \\theta) = \\cos((k+1)\\theta) + i\\sin((k+1)\\theta).
-The theorem holds for all n ∈ ℕ.
+2. Solving the Trigonometric Inequality for Target Height
+We seek all times t \\in [0, 60] such that the cabin is at least 35 m above the ground:
+h(t) \\ge 35
+\\iff 25 - 20\\cos\\left(\\frac{\\pi t}{30}\\right) \\ge 35
+\\iff -20\\cos\\left(\\frac{\\pi t}{30}\\right) \\ge 10
+\\iff \\cos\\left(\\frac{\\pi t}{30}\\right) \\le -\\frac{1}{2}.
 
-3. Extension to Negative Integers n = -m (m ∈ ℕ)
-(\\cos\\theta + i\\sin\\theta)^{-m} = \\frac{1}{(\\cos\\theta + i\\sin\\theta)^m} = \\frac{1}{\\cos(m\\theta) + i\\sin(m\\theta)}
-= \\frac{\\cos(m\\theta) - i\\sin(m\\theta)}{\\cos^2(m\\theta) + \\sin^2(m\\theta)} = \\cos(-m\\theta) + i\\sin(-m\\theta) = \\cos(n\\theta) + i\\sin(n\\theta).
+3. Determining the Time Interval
+On the trigonometric unit circle, \\cos\\theta \\le -\\frac{1}{2} corresponds to angles \\theta satisfying:
+\\frac{2\\pi}{3} \\le \\theta \\le \\frac{4\\pi}{3}.
 
-4. Extraction of n-th Roots of Unity
-Solving z^n = 1 = \\cos(0) + i\\sin(0) gives the n distinct roots of unity:
-z_k = \\cos\\left(\\frac{2k\\pi}{n}\\right) + i\\sin\\left(\\frac{2k\\pi}{n}\\right) \\quad \\text{for } k = 0, 1, ..., n - 1.
-These points form a regular n-sided polygon inscribed in the unit circle on the complex plane. ■`,
+Substituting \\theta = \\frac{\\pi t}{30}:
+\\frac{2\\pi}{3} \\le \\frac{\\pi t}{30} \\le \\frac{4\\pi}{3}.
+
+Multiplying through by \\frac{30}{\\pi}:
+20 \\le t \\le 40 \\text{ seconds}.
+
+4. Conclusion and Interpretation
+The cabin remains at or above a height of 35 m during the time interval from t = 20 s to t = 40 s.
+Thus, passengers enjoy this elevated panoramic view for a continuous duration of 40 - 20 = 20 seconds during each 60-second revolution. ■`,
   },
 
   // =========================================================================

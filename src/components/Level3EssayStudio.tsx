@@ -436,7 +436,7 @@ Therefore, the mathematical conditions are rigorously satisfied, completing the 
 
               {activeProblem.questionVietnamese && (
                 <div className="bg-purple-50/50 p-3 rounded-xl border border-purple-100 text-xs text-purple-900 leading-relaxed">
-                  <span className="font-bold">Đề bài tiếng Việt:</span> {activeProblem.questionVietnamese}
+                  <span className="font-bold">Đề bài tiếng Việt:</span> <RichMathText text={activeProblem.questionVietnamese} />
                 </div>
               )}
             </div>
@@ -624,8 +624,8 @@ Therefore, the mathematical conditions are rigorously satisfied, completing the 
                 </button>
 
                 {showExemplary && (
-                  <div className="pt-2 border-t border-slate-100 text-xs text-slate-700 leading-relaxed font-mono bg-purple-50/40 p-3 rounded-xl border border-purple-100 whitespace-pre-line">
-                    {activeProblem.exemplaryEssay}
+                  <div className="pt-2 border-t border-slate-100 text-xs text-slate-700 leading-relaxed bg-purple-50/40 p-3.5 rounded-xl border border-purple-100 whitespace-pre-line">
+                    <RichMathText text={activeProblem.exemplaryEssay} />
                   </div>
                 )}
               </div>

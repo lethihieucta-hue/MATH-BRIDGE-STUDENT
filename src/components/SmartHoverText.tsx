@@ -35,12 +35,25 @@ export const SmartHoverText: React.FC<SmartHoverTextProps> = ({
 
   // Parse text into tokens
   const renderTokens = () => {
-    // Check if text has inline math $...$
-    const mathSplit = text.split(/(\$[^$]+\$)/g);
+    // Pre-process text to wrap obvious informal formulas like `lim_{...} (...) / (...)` in $...$
+    const processed = text.replace(
+      /((?:\\lim|lim)_\{[^}]+\}\s*(?:\([^)]+\)|[a-zA-Z0-9^+-]+)\s*\/\s*(?:\([^)]+\)|[a-zA-Z0-9^+-]+))/g,
+      "$$$1$$"
+    );
+
+    // Support $$, $, \[, \( delimiters
+    const delimiterRegex = /(\$\$[\s\S]+?\$\$|\$[^\$]+?\$|\\\[[\s\S]+?\\\]|\\\([\s\S]+?\\\))/g;
+    const mathSplit = processed.split(delimiterRegex);
 
     return mathSplit.map((segment, segIdx) => {
-      if (segment.startsWith("$") && segment.endsWith("$")) {
-        return <MathRenderer key={segIdx} math={segment.slice(1, -1)} />;
+      if (!segment) return null;
+
+      if ((segment.startsWith("$$") && segment.endsWith("$$")) || (segment.startsWith("\\[") && segment.endsWith("\\]"))) {
+        return <MathRenderer key={segIdx} math={segment} block={true} />;
+      }
+      if ((segment.startsWith("$") && segment.endsWith("$") && segment.length > 2) ||
+          (segment.startsWith("\\(") && segment.endsWith("\\)"))) {
+        return <MathRenderer key={segIdx} math={segment} block={false} />;
       }
 
       // For non-math text, tokenize and look for matching math terms

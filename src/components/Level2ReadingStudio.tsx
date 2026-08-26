@@ -449,7 +449,7 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
 
                   {showVietnameseTranslation && (
                     <div className="mt-2 bg-blue-50/60 p-3.5 rounded-xl border border-blue-100 text-xs text-blue-900 leading-relaxed">
-                      {activeProblem.questionVietnamese}
+                      <RichMathText text={activeProblem.questionVietnamese} />
                     </div>
                   )}
                 </div>
@@ -467,7 +467,9 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
                     {activeProblem.givenParameters.map((param, pIdx) => (
                       <div key={pIdx} className="bg-white p-2.5 rounded-lg border border-slate-200">
                         <span className="font-bold text-slate-900">{param.label}:</span>{" "}
-                        <span className="font-semibold text-blue-600">{param.value}</span>
+                        <span className="font-semibold text-blue-600">
+                          <RichMathText text={param.value} />
+                        </span>
                         <div className="text-[11px] text-slate-500 mt-0.5">{param.meaningVi}</div>
                       </div>
                     ))}
@@ -475,8 +477,8 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
 
                   {activeProblem.toFind && (
                     <div className="bg-emerald-50/70 p-2.5 rounded-lg border border-emerald-200 text-xs text-emerald-900">
-                      <span className="font-bold">Cần tìm:</span> {activeProblem.toFind.requirementEn}{" "}
-                      <span className="text-emerald-700">({activeProblem.toFind.requirementVi})</span>
+                      <span className="font-bold">Cần tìm:</span> <RichMathText text={activeProblem.toFind.requirementEn} />{" "}
+                      <span className="text-emerald-700">(<RichMathText text={activeProblem.toFind.requirementVi} />)</span>
                     </div>
                   )}
                 </div>
@@ -512,7 +514,9 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
                         >
                           {opt.label}
                         </span>
-                        <span className="leading-relaxed">{opt.text}</span>
+                        <span className="leading-relaxed">
+                          <RichMathText text={opt.text} />
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -582,7 +586,7 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
                 <div className="space-y-2 text-xs text-slate-700">
                   {activeProblem.solutionSteps.map((step, sIdx) => (
                     <div key={sIdx} className="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                      {step}
+                      <RichMathText text={step} />
                     </div>
                   ))}
                 </div>
@@ -617,7 +621,7 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
                     )}
                     <div className="font-semibold text-slate-800">{vocab.meaning}</div>
                     <div className="text-[11px] text-slate-500 italic bg-white p-1.5 rounded border border-slate-100 mt-1">
-                      {vocab.mathContext}
+                      <RichMathText text={vocab.mathContext} />
                     </div>
                   </div>
                 ))}
@@ -640,7 +644,7 @@ export const Level2ReadingStudio: React.FC<Level2ReadingStudioProps> = ({
                 <div className="space-y-2">
                   {activeProblem.socraticSteps.slice(0, unlockedHintsCount).map((hint, hIdx) => (
                     <div key={hIdx} className="p-2.5 bg-amber-50/70 border border-amber-200 rounded-xl text-xs text-amber-950 leading-relaxed">
-                      <span className="font-bold text-amber-800">Gợi ý {hIdx + 1}:</span> {hint}
+                      <span className="font-bold text-amber-800">Gợi ý {hIdx + 1}:</span> <RichMathText text={hint} />
                     </div>
                   ))}
                 </div>

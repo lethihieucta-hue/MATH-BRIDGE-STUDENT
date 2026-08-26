@@ -1393,72 +1393,81 @@ Gram-Schmidt orthogonalization guarantees an isometric Cartesian frame essential
   },
   {
     id: "prob_g12_l3_c2_3",
-    title: "Rodrigues' Rotation Formula & SO(3) Lie Algebra Essay",
+    title: "Spatial Vector Coordinate Analysis of Architectural Roof Truss (SGK KNTT)",
     topic: "Chương II: Toạ độ của vectơ trong không gian",
     chapterId: "g12_c2",
     gradeLevel: 12,
     level: 3,
     exam: "SGK Kết nối tri thức",
     stage: 4,
-    difficulty: "Hard",
-    questionEnglish: "Write an academic robotics and 3D computer graphics essay in English deriving Rodrigues' Rotation Formula: v⃗_{rot} = v⃗ cos θ + (k̂ × v⃗) sin θ + k̂(k̂ · v⃗)(1 - cos θ) for rotating vector v⃗ by angle θ around unit axis k̂, and construct its 3×3 rotation matrix representation R(k̂, θ) ∈ SO(3).",
-    questionVietnamese: "Viết bài luận đồ họa máy tính 3D và robot học bằng tiếng Anh suy dẫn Công thức Xoay Rodrigues: v⃗_{rot} = v⃗ cos θ + (k̂ × v⃗) sin θ + k̂(k̂ · v⃗)(1 - cos θ) khi xoay véctơ v⃗ quanh trục đơn vị k̂ một góc θ, và xây dựng ma trận xoay 3×3 tương ứng R(k̂, θ) ∈ SO(3).",
+    difficulty: "Medium",
+    questionEnglish: "A sports arena roof is designed as a regular square pyramid $S.ABCD$, where the base $ABCD$ is a square of side length $20\\text{ m}$ resting on the horizontal ground, and the apex $S$ is at a height of $h = 10\\text{ m}$ directly above the base center $O$. Set up a 3D Cartesian coordinate system $Oxyz$ with origin at $O$, axis $Oz$ pointing vertically upwards along $OS$, and axes $Ox, Oy$ parallel to the base edges. Write a complete engineering mathematics essay in English: (1) State the coordinates of vertices $A, B, C, D, S$; (2) Calculate the angle between the two opposite load-bearing struts $\\vec{SA}$ and $\\vec{SC}$ using the vector dot product; (3) Determine the angle of inclination of strut $SA$ with the base plane $(ABCD)$.",
+    questionVietnamese: "Mái của một nhà thi đấu thể thao được thiết kế dạng hình chóp tứ giác đều $S.ABCD$, có đáy $ABCD$ là hình vuông cạnh $20\\text{ m}$ nằm trên mặt đất nằm ngang, đỉnh $S$ ở độ cao $h = 10\\text{ m}$ ngay phía trên tâm đáy $O$. Chọn hệ tọa độ $Oxyz$ với gốc tại $O$, trục $Oz$ hướng thẳng đứng theo chiều từ $O$ đến $S$, hai trục $Ox, Oy$ song song với các cạnh đáy. Viết bài tự luận toán học bằng tiếng Anh: (1) Xác định tọa độ các đỉnh $A, B, C, D, S$; (2) Tính góc giữa hai xà gồ chịu lực đối diện $\\vec{SA}$ và $\\vec{SC}$ bằng công thức tích vô hướng; (3) Tính góc nghiêng của xà gồ $SA$ so với mặt sàn đáy $(ABCD)$.",
     givenParameters: [
-      { label: "Rodrigues Formula", value: "v_rot = v cos θ + (k × v) sin θ + k(k · v)(1 - cos θ)", meaningVi: "Công thức xoay không gian Rodrigues" }
+      { label: "Base Edge", value: "$a = 20\\text{ m}$", meaningVi: "Cạnh đáy hình vuông ABCD" },
+      { label: "Apex Height", value: "$h = SO = 10\\text{ m}$", meaningVi: "Chiều cao đỉnh chóp" },
+      { label: "Coordinate Origin", value: "$O(0, 0, 0)$", meaningVi: "Tâm mặt phẳng sàn đáy" }
     ],
     toFind: {
-      requirementEn: "Geometric vector decomposition proof and SO(3) matrix derivation",
-      requirementVi: "Chứng minh phân tích hình học véctơ và ma trận SO(3)"
+      requirementEn: "Vertex coordinates, strut angle $\\angle(SA, SC)$, and floor inclination angle",
+      requirementVi: "Tọa độ đỉnh, góc giữa hai xà gồ SA và SC, góc nghiêng so với sàn"
     },
     keyVocabulary: [
-      { word: "cross product", phonetic: "/krɒs ˈprɒd.ʌkt/", meaning: "công thức xoay Rodrigues trong robotics", mathContext: "v_rot = v cos θ + (k × v) sin θ + k(k · v)(1 - cos θ)." },
-      { word: "dot product", phonetic: "/dɒt ˈprɒd.ʌkt/", meaning: "hình chiếu dọc theo trục quay k̂", mathContext: "v_parallel = (v · k̂) k̂." }
+      { word: "Cartesian coordinates", phonetic: "/kɑːˈtiː.zi.ən kəʊˈɔː.dɪ.nəts/", meaning: "tọa độ Descartes trong không gian Oxyz", mathContext: "Biểu diễn vị trí không gian 3 chiều." },
+      { word: "dot product", phonetic: "/dɒt ˈprɒd.ʌkt/", meaning: "tích vô hướng của hai vectơ", mathContext: "cos θ = (u · v) / (|u| |v|)." },
+      { word: "angle between vectors", phonetic: "/ˈæŋ.ɡəl bɪˈtwiːn ˈvek.tərz/", meaning: "góc giữa hai vectơ", mathContext: "Góc xà gồ chịu lực mái nhà." }
     ],
     socraticSteps: [
-      "Decompose v = v_parallel + v_perp with v_parallel = (k̂ · v) k̂.",
-      "v_perp = v - (k̂ · v) k̂.",
-      "Form orthogonal frame in rotation plane: basis {v_perp, w = k̂ × v}.",
-      "Rotated perpendicular vector: v_perp,rot = v_perp cos θ + (k̂ × v) sin θ.",
-      "Add back parallel component to obtain Rodrigues' formula."
+      "In the Oxyz frame with Ox, Oy parallel to edges, the base vertices are $A(-10, -10, 0)$, $B(10, -10, 0)$, $C(10, 10, 0)$, $D(-10, 10, 0)$, and apex $S(0, 0, 10)$.",
+      "Compute vectors: $\\vec{SA} = (-10, -10, -10)$ and $\\vec{SC} = (10, 10, -10)$.",
+      "Compute dot product: $\\vec{SA} \\cdot \\vec{SC} = (-10)(10) + (-10)(10) + (-10)(-10) = -100 - 100 + 100 = -100$.",
+      "Compute magnitudes: $|\\vec{SA}| = |\\vec{SC}| = \\sqrt{(-10)^2 + (-10)^2 + (-10)^2} = \\sqrt{300} = 10\\sqrt{3}$.",
+      "Evaluate $\\cos\\angle(SA, SC) = \\frac{-100}{300} = -\\frac{1}{3} \\Rightarrow \\angle(SA, SC) \\approx 109.47^\\circ$."
     ],
-    commonPitfall: "Quên giữ nguyên thành phần song song với trục quay (v_parallel không bị ảnh hưởng bởi phép quay).",
-    exemplaryEssay: `Robotics Kinematics & 3D Spatial Geometry Report: Analytical Derivation of Rodrigues' Rotation Formula
+    commonPitfall: "Nhầm lẫn tọa độ các đỉnh từ tâm O (phải là ±10 thay vì ±20).",
+    exemplaryEssay: `Spatial Vector Coordinate Analysis of a Regular Pyramid Arena Roof Structure
 
-1. Vector Decomposition Along Rotation Axis
-Let v⃗ be an arbitrary vector in ℝ³. We rotate v⃗ by angle θ counterclockwise around a fixed unit axis k̂ (|k̂| = 1).
-Decompose v⃗ into parallel and perpendicular components relative to axis k̂:
-\\vec{v} = \\vec{v}_\\parallel + \\vec{v}_\\perp,
-where:
-- Parallel Component: \\vec{v}_\\parallel = (\\vec{v} \\cdot \\hat{\\mathbf{k}}) \\hat{\\mathbf{k}}.
-- Perpendicular Component: \\vec{v}_\\perp = \\vec{v} - \\vec{v}_\\parallel = \\vec{v} - (\\vec{v} \\cdot \\hat{\\mathbf{k}}) \\hat{\\mathbf{k}}.
+1. Setup of the 3D Coordinate System and Vertex Coordinates
+Let $O(0, 0, 0)$ be the center of the square base $ABCD$, which lies on the horizontal ground plane $z = 0$.
+The base side length is $a = 20\\text{ m}$, so the distance from the center $O$ to each side is $10\\text{ m}$.
+Setting axes $Ox$ and $Oy$ parallel to the edges of the base and axis $Oz$ vertically upwards along $OS$:
+- Vertex $A$: $(-10, -10, 0)$
+- Vertex $B$: $(10, -10, 0)$
+- Vertex $C$: $(10, 10, 0)$
+- Vertex $D$: $(-10, 10, 0)$
+- Apex $S$: $(0, 0, 10)$ since $h = SO = 10\\text{ m}$.
 
-2. Planar Rotation of the Perpendicular Component
-The rotation leaves the parallel component invariant: \\vec{v}_{\\parallel, \\text{rot}} = \\vec{v}_\\parallel.
-The perpendicular component v⃗_⊥ rotates purely in the plane orthogonal to k̂.
-Construct a mutually perpendicular in-plane reference vector:
-\\vec{w} = \\hat{\\mathbf{k}} \\times \\vec{v}_\\perp = \\hat{\\mathbf{k}} \\times (\\vec{v} - \\vec{v}_\\parallel) = \\hat{\\mathbf{k}} \\times \\vec{v}.
-Notice that |w⃗| = |k̂||v⃗_⊥| sin(90°) = |v⃗_⊥|.
+2. Angle Between Opposite Struts SA and SC
+The direction vectors of the two opposite load-bearing struts are:
+$\\vec{SA} = A - S = (-10 - 0, -10 - 0, 0 - 10) = (-10, -10, -10)$
+$\\vec{SC} = C - S = (10 - 0, 10 - 0, 0 - 10) = (10, 10, -10)$
 
-The rotated perpendicular vector in the basis {v⃗_⊥, w⃗} is:
-\\vec{v}_{\\perp, \\text{rot}} = \\vec{v}_\\perp \\cos\\theta + \\vec{w} \\sin\\theta = [\\vec{v} - (\\vec{v} \\cdot \\hat{\\mathbf{k}}) \\hat{\\mathbf{k}}] \\cos\\theta + (\\hat{\\mathbf{k}} \\times \\vec{v}) \\sin\\theta.
+Computing the scalar (dot) product:
+$\\vec{SA} \\cdot \\vec{SC} = (-10)(10) + (-10)(10) + (-10)(-10) = -100 - 100 + 100 = -100$.
 
-3. Recombination into Rodrigues' Closed Formula
-Summing both components:
-\\vec{v}_{\\text{rot}} = \\vec{v}_{\\parallel, \\text{rot}} + \\vec{v}_{\\perp, \\text{rot}}
-= (\\vec{v} \\cdot \\hat{\\mathbf{k}}) \\hat{\\mathbf{k}} + [\\vec{v} - (\\vec{v} \\cdot \\hat{\\mathbf{k}}) \\hat{\\mathbf{k}}] \\cos\\theta + (\\hat{\\mathbf{k}} \\times \\vec{v}) \\sin\\theta.
+Computing the vector magnitudes:
+$|\\vec{SA}| = \\sqrt{(-10)^2 + (-10)^2 + (-10)^2} = \\sqrt{100 + 100 + 100} = \\sqrt{300} = 10\\sqrt{3}\\text{ m}$
+$|\\vec{SC}| = \\sqrt{10^2 + 10^2 + (-10)^2} = \\sqrt{300} = 10\\sqrt{3}\\text{ m}$.
 
-Rearranging terms by functional basis:
-\\vec{v}_{\\text{rot}} = \\vec{v} \\cos\\theta + (\\hat{\\mathbf{k}} \\times \\vec{v}) \\sin\\theta + \\hat{\\mathbf{k}}(\\hat{\\mathbf{k}} \\cdot \\vec{v})(1 - \\cos\\theta).
+Applying the dot product angle formula:
+$\\cos\\theta = \\frac{\\vec{SA} \\cdot \\vec{SC}}{|\\vec{SA}| \\cdot |\\vec{SC}|} = \\frac{-100}{(10\\sqrt{3})(10\\sqrt{3})} = \\frac{-100}{300} = -\\frac{1}{3}$.
 
-4. SO(3) Matrix Exponential Representation
-Define the skew-symmetric cross-product matrix K such that K v = k̂ × v:
-K = \\begin{pmatrix} 0 & -k_z & k_y \\\\ k_z & 0 & -k_x \\\\ -k_y & k_x & 0 \\end{pmatrix}.
+Therefore:
+$\\theta = \\arccos\\left(-\\frac{1}{3}\\right) \\approx 109.47^\\circ$.
+The angle between the two opposite struts $\\vec{SA}$ and $\\vec{SC}$ at the apex is approximately $109.5^\\circ$.
 
-Then Rodrigues' formula expresses the matrix exponential R = e^{θ K} ∈ SO(3):
-R(\\hat{\\mathbf{k}}, \\theta) = I + (\\sin\\theta) K + (1 - \\cos\\theta) K^2.
+3. Angle of Inclination of Strut SA with the Floor Plane (ABCD)
+Since $SO \\perp (ABCD)$ at $O$, the orthogonal projection of strut $SA$ onto the floor plane is segment $OA$.
+Thus, the inclination angle $\\alpha$ is $\\angle SAO$ in right triangle $SOA$:
+$OA = \\sqrt{(-10)^2 + (-10)^2} = \\sqrt{200} = 10\\sqrt{2}\\text{ m}$
+$SO = 10\\text{ m}$
+$\\tan\\alpha = \\frac{SO}{OA} = \\frac{10}{10\\sqrt{2}} = \\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2} \\approx 0.7071$.
 
-Conclusion:
-Rodrigues' rotation formula is the computational engine of spatial manipulator robotics, aerospace guidance systems, and GPU shader rendering. ■`,
+Hence:
+$\\alpha = \\arctan\\left(\\frac{\\sqrt{2}}{2}\\right) \\approx 35.26^\\circ$.
+
+4. Structural Engineering Conclusion
+The opposite struts meet at an apex angle of $109.5^\\circ$ and incline at $35.3^\\circ$ relative to the ground floor, providing stable load distribution for the arena canopy. ■`,
   },
   {
     id: "prob_g12_l3_c2_4",
